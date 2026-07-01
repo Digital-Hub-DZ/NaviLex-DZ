@@ -1,0 +1,452 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0a1628;--navy2:#112240;--navy3:#1a3a5c;--gold:#c9a84c;--gold2:#e8c96a;--white:#f0f4ff;--muted:#8892b0;--accent:#4fc3f7;--surface:rgba(255,255,255,0.05);--radius:8px}
+body,html{font-family:'Segoe UI',sans-serif;background:var(--navy);color:var(--white);min-height:100vh}
+.app{min-height:600px;background:var(--navy)}
+.header{background:linear-gradient(135deg,var(--navy2) 0%,var(--navy3) 100%);border-bottom:2px solid var(--gold);padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding-top:1rem;padding-bottom:1rem}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-icon{width:48px;height:48px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:var(--navy);font-family:serif}
+.logo-text h1{font-size:22px;font-weight:700;color:var(--gold);letter-spacing:1px}
+.logo-text p{font-size:11px;color:var(--muted);letter-spacing:2px}
+.lang-switcher{display:flex;gap:6px}
+.lang-btn{padding:4px 10px;border:1px solid var(--gold);background:transparent;color:var(--gold);border-radius:4px;cursor:pointer;font-size:12px;transition:all .2s}
+.lang-btn.active,.lang-btn:hover{background:var(--gold);color:var(--navy);font-weight:600}
+.nav{background:var(--navy2);display:flex;overflow-x:auto;border-bottom:1px solid rgba(201,168,76,0.2);padding:0 1rem}
+.nav-btn{padding:14px 16px;border:none;background:transparent;color:var(--muted);cursor:pointer;font-size:13px;white-space:nowrap;border-bottom:3px solid transparent;transition:all .2s;display:flex;align-items:center;gap:6px}
+.nav-btn.active,.nav-btn:hover{color:var(--gold);border-bottom-color:var(--gold)}
+.content{padding:1.5rem;max-width:900px;margin:0 auto}
+.section{display:none}
+.section.active{display:block}
+
+/* Ranks */
+.ranks-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:1rem}
+.rank-card{background:var(--surface);border:1px solid rgba(201,168,76,0.3);border-radius:10px;padding:14px 10px;text-align:center;cursor:pointer;transition:all .25s}
+.rank-card:hover{border-color:var(--gold);transform:translateY(-3px);background:rgba(201,168,76,0.08)}
+.rank-badge{font-size:28px;margin-bottom:8px}
+.rank-stars{color:var(--gold);font-size:10px;letter-spacing:1px}
+.rank-name{font-size:12px;font-weight:600;margin-top:6px;color:var(--white)}
+.rank-code{font-size:10px;color:var(--muted);margin-top:2px}
+.rank-category{font-size:13px;font-weight:600;color:var(--gold);margin:1.5rem 0 0.5rem;text-transform:uppercase;letter-spacing:2px;border-left:3px solid var(--gold);padding-left:10px}
+.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);z-index:100;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:var(--navy2);border:2px solid var(--gold);border-radius:16px;padding:2rem;max-width:480px;width:90%;position:relative;max-height:85vh;overflow-y:auto}
+.modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;line-height:1}
+.modal h2{color:var(--gold);font-size:20px;margin-bottom:6px}
+.modal .modal-badge{font-size:50px;text-align:center;margin:1rem 0}
+.modal-section{margin-top:1rem;padding:10px;background:rgba(255,255,255,0.04);border-radius:8px;border-left:3px solid var(--gold)}
+.modal-section h4{font-size:11px;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
+.modal-section p,.modal-section ul{font-size:13px;color:var(--muted);line-height:1.7}
+.modal-section ul{padding-left:1rem}
+
+/* Laws */
+.search-bar{position:relative;margin-bottom:1rem}
+.search-bar input{width:100%;padding:10px 14px 10px 40px;background:var(--surface);border:1px solid rgba(201,168,76,0.3);border-radius:8px;color:var(--white);font-size:14px;outline:none}
+.search-bar input:focus{border-color:var(--gold)}
+.search-bar input::placeholder{color:var(--muted)}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:16px}
+.law-category-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1rem}
+.cat-tab{padding:6px 14px;border:1px solid rgba(201,168,76,0.3);background:transparent;color:var(--muted);border-radius:20px;cursor:pointer;font-size:12px;transition:all .2s}
+.cat-tab.active,.cat-tab:hover{background:var(--gold);color:var(--navy);border-color:var(--gold);font-weight:600}
+.law-item{background:var(--surface);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:14px;margin-bottom:10px;cursor:pointer;transition:all .2s}
+.law-item:hover{border-color:var(--gold);background:rgba(201,168,76,0.05)}
+.law-item-header{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.law-number{background:rgba(201,168,76,0.15);color:var(--gold);font-size:11px;font-weight:700;padding:3px 8px;border-radius:4px;white-space:nowrap}
+.law-title{font-size:14px;font-weight:600;flex:1}
+.law-cat-badge{font-size:10px;color:var(--muted);background:rgba(255,255,255,0.06);padding:2px 8px;border-radius:10px;white-space:nowrap}
+.law-body{font-size:13px;color:var(--muted);margin-top:10px;line-height:1.7;display:none;border-top:1px solid rgba(255,255,255,0.08);padding-top:10px}
+.law-item.expanded .law-body{display:block}
+
+/* Quiz */
+.quiz-container{max-width:650px;margin:0 auto}
+.scenario-box{background:var(--navy3);border:1px solid rgba(79,195,247,0.3);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem}
+.scenario-label{font-size:11px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.scenario-text{font-size:15px;line-height:1.7}
+.quiz-options{display:grid;gap:10px;margin-bottom:1rem}
+.quiz-option{padding:14px 18px;background:var(--surface);border:1px solid rgba(255,255,255,0.12);border-radius:10px;cursor:pointer;font-size:14px;text-align:right;direction:rtl;transition:all .2s;line-height:1.5}
+.quiz-option:hover:not(.disabled){border-color:var(--accent);background:rgba(79,195,247,0.06)}
+.quiz-option.correct{border-color:#4caf50;background:rgba(76,175,80,0.12);color:#81c784}
+.quiz-option.wrong{border-color:#ef5350;background:rgba(239,83,80,0.12);color:#e57373}
+.quiz-option.disabled{cursor:not-allowed}
+.quiz-result{background:rgba(201,168,76,0.08);border:1px solid var(--gold);border-radius:10px;padding:1rem 1.2rem;font-size:13px;color:var(--white);line-height:1.7;display:none}
+.quiz-result.show{display:block}
+.quiz-result strong{color:var(--gold)}
+.next-btn{margin-top:1rem;padding:10px 24px;background:var(--gold);color:var(--navy);border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;display:none}
+.next-btn.show{display:inline-block}
+.next-btn:hover{background:var(--gold2)}
+.score-bar{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem}
+.score-label{font-size:12px;color:var(--muted)}
+.score-val{font-size:18px;font-weight:700;color:var(--gold)}
+
+/* Flags */
+.flags-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:12px;margin-top:1rem}
+.flag-card{background:var(--surface);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .25s}
+.flag-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.flag-visual{width:70px;height:50px;margin:0 auto 8px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:22px;border:1px solid rgba(255,255,255,0.2)}
+.flag-letter{font-size:20px;font-weight:700;color:var(--gold)}
+.flag-name{font-size:11px;color:var(--white);font-weight:600}
+.flag-meaning{font-size:10px;color:var(--muted);margin-top:3px;line-height:1.4}
+
+.section-title{font-size:20px;font-weight:700;color:var(--white);margin-bottom:4px}
+.section-subtitle{font-size:13px;color:var(--muted);margin-bottom:1.5rem}
+</style>
+
+<div class="app">
+  <div class="header">
+    <div class="logo">
+      <div class="logo-icon">⚓</div>
+      <div class="logo-text">
+        <h1>NaviLex DZ</h1>
+        <p id="tagline">المرشد البحري الرقمي الجزائري</p>
+      </div>
+    </div>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('ar')">العربية</button>
+      <button class="lang-btn" onclick="setLang('fr')">Français</button>
+      <button class="lang-btn" onclick="setLang('en')">English</button>
+    </div>
+  </div>
+
+  <nav class="nav">
+    <button class="nav-btn active" onclick="showSection('ranks')">🎖️ <span class="t" data-key="nav_ranks">الرتب</span></button>
+    <button class="nav-btn" onclick="showSection('laws')">📜 <span class="t" data-key="nav_laws">القوانين</span></button>
+    <button class="nav-btn" onclick="showSection('quiz')">🧩 <span class="t" data-key="nav_quiz">المحاكاة</span></button>
+    <button class="nav-btn" onclick="showSection('flags')">🚩 <span class="t" data-key="nav_flags">الإشارات</span></button>
+  </nav>
+
+  <div class="content">
+
+    <!-- RANKS SECTION -->
+    <div class="section active" id="sec-ranks">
+      <p class="section-title t" data-key="ranks_title">التسلسل الهرمي للرتب البحرية</p>
+      <p class="section-subtitle t" data-key="ranks_sub">اضغط على أي رتبة لعرض تفاصيلها الكاملة</p>
+      <div id="ranks-list"></div>
+    </div>
+
+    <!-- LAWS SECTION -->
+    <div class="section" id="sec-laws">
+      <p class="section-title t" data-key="laws_title">موسوعة القوانين البحرية</p>
+      <p class="section-subtitle t" data-key="laws_sub">ابحث برقم المادة أو بالكلمة المفتاحية</p>
+      <div class="search-bar">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="law-search" placeholder="" oninput="filterLaws()">
+      </div>
+      <div class="law-category-tabs" id="law-tabs"></div>
+      <div id="laws-list"></div>
+    </div>
+
+    <!-- QUIZ SECTION -->
+    <div class="section" id="sec-quiz">
+      <p class="section-title t" data-key="quiz_title">المحاكاة القانونية</p>
+      <p class="section-subtitle t" data-key="quiz_sub">اختبر معرفتك بالقانون البحري عبر سيناريوهات حقيقية</p>
+      <div class="quiz-container" id="quiz-container"></div>
+    </div>
+
+    <!-- FLAGS SECTION -->
+    <div class="section" id="sec-flags">
+      <p class="section-title t" data-key="flags_title">دليل الإشارات البحرية الدولية</p>
+      <p class="section-subtitle t" data-key="flags_sub">أعلام الإشارات الدولية ومعانيها القانونية</p>
+      <div class="flags-grid" id="flags-grid"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Rank Modal -->
+<div class="modal-overlay" id="rank-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<script>
+const T = {
+  ar:{
+    tagline:"المرشد البحري الرقمي الجزائري",
+    nav_ranks:"الرتب",nav_laws:"القوانين",nav_quiz:"المحاكاة",nav_flags:"الإشارات",
+    ranks_title:"التسلسل الهرمي للرتب البحرية",ranks_sub:"اضغط على أي رتبة لعرض تفاصيلها الكاملة",
+    laws_title:"موسوعة القوانين البحرية",laws_sub:"ابحث برقم المادة أو بالكلمة المفتاحية",
+    quiz_title:"المحاكاة القانونية",quiz_sub:"اختبر معرفتك بالقانون البحري عبر سيناريوهات حقيقية",
+    flags_title:"دليل الإشارات البحرية الدولية",flags_sub:"أعلام الإشارات الدولية ومعانيها القانونية",
+    law_search_ph:"ابحث عن مادة أو كلمة مفتاحية...",
+    tasks:"المهام والمسؤوليات",address:"طريقة المخاطبة",grade:"الدرجة",
+    next:"السؤال التالي ←",score:"النتيجة",
+    cat_all:"الكل",
+    correct_ans:"إجابة صحيحة ✓",wrong_ans:"إجابة خاطئة ✗"
+  },
+  fr:{
+    tagline:"Le Guide Maritime Numérique Algérien",
+    nav_ranks:"Grades",nav_laws:"Lois",nav_quiz:"Simulation",nav_flags:"Signaux",
+    ranks_title:"Hiérarchie des Grades Navals",ranks_sub:"Cliquez sur un grade pour voir ses détails",
+    laws_title:"Encyclopédie du Droit Maritime",laws_sub:"Recherchez par numéro d'article ou mot-clé",
+    quiz_title:"Simulation Juridique",quiz_sub:"Testez vos connaissances via des scénarios réels",
+    flags_title:"Guide des Signaux Maritimes Internationaux",flags_sub:"Pavillons du Code International des Signaux",
+    law_search_ph:"Rechercher un article ou un mot-clé...",
+    tasks:"Missions et Responsabilités",address:"Forme d'adresse",grade:"Grade",
+    next:"Question suivante →",score:"Score",
+    cat_all:"Tout",
+    correct_ans:"Bonne réponse ✓",wrong_ans:"Mauvaise réponse ✗"
+  },
+  en:{
+    tagline:"The Algerian Digital Maritime Guide",
+    nav_ranks:"Ranks",nav_laws:"Laws",nav_quiz:"Simulation",nav_flags:"Signals",
+    ranks_title:"Naval Ranks Hierarchy",ranks_sub:"Click any rank to view full details",
+    laws_title:"Maritime Law Encyclopedia",laws_sub:"Search by article number or keyword",
+    quiz_title:"Legal Simulation",quiz_sub:"Test your maritime law knowledge with real scenarios",
+    flags_title:"International Maritime Signals Guide",flags_sub:"International Code of Signals flags and meanings",
+    law_search_ph:"Search for an article or keyword...",
+    tasks:"Duties & Responsibilities",address:"Form of Address",grade:"Grade",
+    next:"Next Question →",score:"Score",
+    cat_all:"All",
+    correct_ans:"Correct ✓",wrong_ans:"Wrong ✗"
+  }
+};
+
+const RANKS_DATA = [
+  {cat:{ar:"رجال الصف",fr:"Sous-officiers mariniers",en:"Enlisted Sailors"},items:[
+    {badge:"⚓",stars:"★",name:{ar:"بحار",fr:"Matelot",en:"Seaman"},code:"E-1",
+     tasks:{ar:["تنفيذ أوامر المشرفين","صيانة معدات السفينة","المناوبات والحراسة","المشاركة في عمليات الإنقاذ"],fr:["Exécuter les ordres","Entretenir les équipements","Assurer les gardes","Participer aux opérations"],en:["Execute orders","Maintain equipment","Stand watches","Participate in rescue ops"]},
+     address:{ar:"يُخاطَب بـ: بحار + الاسم",fr:"Adresse: Matelot + Nom",en:"Address: Seaman + Name"}},
+    {badge:"⚓",stars:"★★",name:{ar:"بحار أول",fr:"Matelot de 1ère classe",en:"Seaman First Class"},code:"E-2",
+     tasks:{ar:["مساعدة في تشغيل معدات الملاحة","الإشراف على بحارة أقل رتبة","صيانة الأنظمة الكهربائية"],fr:["Aider à opérer les équipements de navigation","Superviser les matelots","Entretenir les systèmes électriques"],en:["Assist in navigation equipment operation","Supervise lower-rank sailors","Maintain electrical systems"]},
+     address:{ar:"يُخاطَب بـ: بحار أول + الاسم",fr:"Adresse: Matelot 1ère Classe",en:"Address: Seaman First Class + Name"}}
+  ]},
+  {cat:{ar:"ضباط الصف",fr:"Officiers mariniers",en:"Petty Officers"},items:[
+    {badge:"🔱",stars:"★★★",name:{ar:"وكيل بحرية",fr:"Second-maître",en:"Petty Officer"},code:"O-1",
+     tasks:{ar:["قيادة فرق العمل الصغيرة","الإشراف على التدريبات","تقديم تقارير للضباط","إدارة مخازن السفينة"],fr:["Commander de petites équipes","Superviser les entraînements","Soumettre des rapports aux officiers","Gérer les réserves"],en:["Lead small work teams","Supervise training","Submit reports to officers","Manage ship stores"]},
+     address:{ar:"يُخاطَب بـ: وكيل",fr:"Adresse: Second-maître",en:"Address: Petty Officer"}},
+    {badge:"🔱",stars:"★★★★",name:{ar:"ملازم بحري",fr:"Enseigne de vaisseau",en:"Ensign"},code:"O-2",
+     tasks:{ar:["ضابط مناوب على الجسر","إدارة قسم من أقسام السفينة","الإشراف على أفراد ضباط الصف","كتابة تقارير الملاحة"],fr:["Officier de quart sur la passerelle","Gérer une section du navire","Superviser les officiers mariniers","Rédiger des rapports de navigation"],en:["Officer of the watch on bridge","Manage a ship section","Supervise petty officers","Write navigation reports"]},
+     address:{ar:"يُخاطَب بـ: سيدي الملازم",fr:"Adresse: Mon Enseigne",en:"Address: Sir/Ma'am"}}
+  ]},
+  {cat:{ar:"الضباط",fr:"Officiers",en:"Officers"},items:[
+    {badge:"🌟",stars:"★★★★★",name:{ar:"نقيب بحري",fr:"Lieutenant de vaisseau",en:"Lieutenant"},code:"O-3",
+     tasks:{ar:["قيادة وحدة أو سفينة صغيرة","الإشراف على عمليات الملاحة","التخطيط للمهام التكتيكية","الاستجواب والتحقيق في الحوادث"],fr:["Commander une unité ou petit navire","Superviser les opérations de navigation","Planifier les missions tactiques","Mener des enquêtes sur les incidents"],en:["Command a unit or small vessel","Supervise navigation operations","Plan tactical missions","Conduct incident investigations"]},
+     address:{ar:"يُخاطَب بـ: سيدي النقيب",fr:"Adresse: Mon Lieutenant",en:"Address: Lieutenant"}},
+    {badge:"🌟",stars:"★★★★★★",name:{ar:"مقدم بحري",fr:"Capitaine de corvette",en:"Commander"},code:"O-4",
+     tasks:{ar:["قيادة سفينة حربية متوسطة","رسم خطط الملاحة والمناورات","الإشراف على جميع ضباط السفينة","التنسيق مع القيادة العليا"],fr:["Commander un navire de guerre moyen","Tracer les plans de navigation","Superviser tous les officiers","Coordonner avec le commandement supérieur"],en:["Command a medium warship","Plan navigation and maneuvers","Supervise all ship officers","Coordinate with high command"]},
+     address:{ar:"يُخاطَب بـ: سيدي المقدم",fr:"Adresse: Commandant",en:"Address: Commander"}}
+  ]},
+  {cat:{ar:"الضباط السامون",fr:"Officiers supérieurs",en:"Senior Officers"},items:[
+    {badge:"👑",stars:"★★★★★★★",name:{ar:"عميد بحري",fr:"Contre-amiral",en:"Rear Admiral"},code:"O-7",
+     tasks:{ar:["قيادة أسطول أو منطقة بحرية","وضع الاستراتيجيات البحرية","التفاوض مع القوى الأجنبية","الإشراف على جميع العمليات البحرية"],fr:["Commander une flotte ou zone maritime","Élaborer les stratégies navales","Négocier avec les puissances étrangères","Superviser toutes les opérations navales"],en:["Command a fleet or naval zone","Develop naval strategies","Negotiate with foreign powers","Oversee all naval operations"]},
+     address:{ar:"يُخاطَب بـ: سيادة العميد",fr:"Adresse: Amiral",en:"Address: Admiral"}},
+    {badge:"👑",stars:"★★★★★★★★",name:{ar:"أمير البحرية",fr:"Amiral",en:"Admiral"},code:"O-10",
+     tasks:{ar:["القائد الأعلى للبحرية الوطنية","تمثيل القوة البحرية دولياً","وضع سياسة الدفاع البحري","التنسيق مع رئاسة الجمهورية"],fr:["Commandant suprême de la marine nationale","Représenter la puissance navale internationalement","Définir la politique de défense navale","Coordonner avec la présidence de la République"],en:["Supreme Commander of the National Navy","Represent naval power internationally","Define naval defense policy","Coordinate with the Presidency"]},
+     address:{ar:"يُخاطَب بـ: فخامة الأمير",fr:"Adresse: Amiral de la flotte",en:"Address: Fleet Admiral"}}
+  ]}
+];
+
+const LAWS_DATA = [
+  {num:"Art. 16",cat:{ar:"الوقاية من التصادم",fr:"Prévention des collisions",en:"Collision Prevention"},
+   title:{ar:"قاعدة السفن المتلاقية وجهاً لوجه",fr:"Règle des navires en approche directe",en:"Head-on Situation Rule"},
+   text:{ar:"عندما تقترب سفينتان آليتان وجهاً لوجه بحيث يكون هناك خطر تصادم، وجب على كل منهما أن تحجم لليمين بحيث تعبر كل منهما على الجانب الأيسر للأخرى. هذه القاعدة مستوحاة من القاعدة 14 من لوائح COLREGs الدولية.",fr:"Quand deux navires à propulsion mécanique font route en sens contraires ou presque contraires, de sorte qu'il existe un risque d'abordage, chacun d'eux doit venir sur tribord afin de passer sur le côté bâbord de l'autre. Règle 14 des COLREGS.",en:"When two power-driven vessels are meeting on reciprocal or nearly reciprocal courses so as to involve risk of collision each shall alter her course to starboard so that each shall pass on the port side of the other. COLREG Rule 14."}},
+  {num:"Art. 18",cat:{ar:"الوقاية من التصادم",fr:"Prévention des collisions",en:"Collision Prevention"},
+   title:{ar:"أولوية المرور - السفن التي ينبغي تجنبها",fr:"Priorité de passage - navires à éviter",en:"Priority of Navigation - Vessels to Keep Clear Of"},
+   text:{ar:"السفن الآلية يجب أن تتحاشى: السفن غير القادرة على المناورة، السفن محدودة القدرة على المناورة، السفن المشغولة بالصيد، والسفن الشراعية. الترتيب: عاجزة → محدودة → صيد → شراعية → آلية.",fr:"Les navires à propulsion mécanique doivent s'écarter: des navires non-manœuvrants, à capacité de manœuvre restreinte, occupés à la pêche et à voile. Ordre: NUC → RAM → Pêche → Voilier → Moteur.",en:"Power-driven vessels shall keep out of the way of: vessels not under command, vessels restricted in ability to maneuver, vessels engaged in fishing, and sailing vessels. Order: NUC → RAM → Fishing → Sailing → Power."}},
+  {num:"Art. 33",cat:{ar:"حقوق البحارة",fr:"Droits des marins",en:"Sailors' Rights"},
+   title:{ar:"ساعات العمل والراحة على متن السفينة",fr:"Heures de travail et de repos à bord",en:"Hours of Work and Rest on Board"},
+   text:{ar:"لا يجوز أن تتجاوز ساعات العمل 14 ساعة في أي فترة 24 ساعة، ولا 72 ساعة في أي فترة 7 أيام. ويجب أن تكون ساعات الراحة على الأقل 10 ساعات في أي فترة 24 ساعة، ولا تقل عن 77 ساعة في أي فترة 7 أيام. (اتفاقية العمل البحري MLC 2006)",fr:"Les heures de travail ne doivent pas dépasser 14 heures sur toute période de 24 heures et 72 heures sur toute période de 7 jours. Les heures de repos ne doivent pas être inférieures à 10 heures sur toute période de 24h et 77 heures sur 7 jours. (MLC 2006)",en:"Hours of work shall not exceed 14 hours in any 24-hour period, and 72 hours in any 7-day period. Hours of rest shall not be less than 10 hours in any 24-hour period, and 77 hours in any 7-day period. (MLC 2006)"}},
+  {num:"Art. 98",cat:{ar:"الإنقاذ البحري",fr:"Sauvetage maritime",en:"Maritime Rescue"},
+   title:{ar:"واجب الإنقاذ في البحر",fr:"Obligation de porter secours en mer",en:"Duty to Render Assistance at Sea"},
+   text:{ar:"على ربان كل سفينة أن يبادر، ما لم يعرض ذلك سفينته وبحارته وركابه لخطر جسيم، إلى تقديم المساعدة لأي شخص في خطر الغرق. ويجوز للربان المطالبة بعلاوة إنقاذ عادلة. (المادة 98 من اتفاقية الأمم المتحدة لقانون البحار UNCLOS 1982)",fr:"Le capitaine de tout navire est tenu, pour autant que cela ne crée pas de danger sérieux pour son navire, son équipage ou ses passagers, de prêter assistance à toute personne trouvée en péril en mer. (UNCLOS 1982, Art. 98)",en:"The master of a ship is bound, so far as he can do so without serious danger to the ship, the crew or the passengers, to render assistance to any person found at sea in danger of being lost. Fair salvage award may be claimed. (UNCLOS 1982, Art. 98)"}},
+  {num:"Art. 5",cat:{ar:"المياه الإقليمية",fr:"Eaux territoriales",en:"Territorial Waters"},
+   title:{ar:"حدود المياه الإقليمية الجزائرية",fr:"Limites des eaux territoriales algériennes",en:"Algerian Territorial Waters Limits"},
+   text:{ar:"تمتد المياه الإقليمية للجمهورية الجزائرية الديمقراطية الشعبية 12 ميلاً بحرياً من خط الأساس. وتمتد المنطقة الاقتصادية الخالصة 200 ميل بحري. لا يحق لأي سفينة أجنبية الدخول دون إشعار مسبق. (القانون البحري الجزائري 98-05)",fr:"Les eaux territoriales de la République Algérienne Démocratique et Populaire s'étendent sur 12 milles marins depuis la ligne de base. La Zone Économique Exclusive s'étend sur 200 milles. (Loi Maritime Algérienne 98-05)",en:"The territorial waters of the People's Democratic Republic of Algeria extend 12 nautical miles from the baseline. The Exclusive Economic Zone extends 200 nautical miles. Foreign vessels require prior notification to enter. (Algerian Maritime Law 98-05)"}},
+  {num:"SOLAS XI",cat:{ar:"السلامة البحرية",fr:"Sécurité maritime",en:"Maritime Safety"},
+   title:{ar:"نظام ISPS لأمن السفن والمنشآت",fr:"Code ISPS - Sécurité des navires et installations",en:"ISPS Code - Ship and Port Facility Security"},
+   text:{ar:"يُلزم نظام ISPS الدولي لأمن السفن والمنشآت المرفأية جميع السفن التجارية الدولية وأصحاب العمل والحكومات بتبني تدابير أمنية محددة. يشمل: تقييم أمن السفينة، خطة أمن السفينة، ضابط أمن السفينة. (SOLAS Chapter XI-2)",fr:"Le Code ISPS exige que tous les navires commerciaux internationaux adoptent des mesures de sécurité spécifiques incluant: l'évaluation de la sûreté du navire, le plan de sûreté, l'officier de sûreté. (SOLAS Chapitre XI-2)",en:"The ISPS Code requires all international commercial ships, owners and governments to adopt specific security measures including: Ship Security Assessment, Ship Security Plan, and Ship Security Officer. (SOLAS Chapter XI-2)"}}
+];
+
+const QUIZ_DATA = [
+  {scenario:{ar:"سفينتان آليتان تسيران في اتجاهين متعاكسين وتقتربان وجهاً لوجه في ممر ملاحي ضيق، وهناك خطر تصادم واضح. ما هو الإجراء الصحيح وفقاً لقواعد COLREGs؟",fr:"Deux navires à propulsion mécanique naviguent en sens contraires et s'approchent face à face dans un chenal étroit, avec un risque évident de collision. Quelle est la bonne procédure selon les COLREGS?",en:"Two power-driven vessels are navigating in opposite directions approaching head-on in a narrow channel, with clear risk of collision. What is the correct procedure according to COLREGS?"},
+   options:{ar:["كلتا السفينتين تنحرف لليمين (Starboard)","السفينة الأكبر لها الأولوية وتبقى في مسارها","السفينة القادمة من الجانب الأيمن لها الأولوية","يُطلق صافرة واحدة ثم الانتظار"],fr:["Les deux navires virent à tribord","Le plus grand navire a priorité et reste en cap","Le navire venant de tribord a la priorité","Un coup de sifflet puis attendre"],en:["Both vessels turn to starboard","The larger vessel has priority and maintains course","The vessel coming from starboard has priority","One blast of whistle then wait"]},
+   correct:0,
+   explanation:{ar:"وفقاً للقاعدة 14 من COLREGs (حالة التلاقي وجهاً لوجه): يجب على كل سفينة أن تنحرف لليمين (إلى الجانب الأخضر/Starboard) بحيث تعبر كل منهما على الجانب الأيسر (الأحمر/Port) للأخرى. هذا مبدأ أساسي في منع التصادم في البحر.",fr:"Selon la Règle 14 des COLREGS (situation de face à face): Chaque navire doit venir à tribord (côté vert) afin de passer sur le côté bâbord (rouge) de l'autre. C'est un principe fondamental de prévention des abordages en mer.",en:"According to COLREG Rule 14 (head-on situation): Each vessel must alter course to starboard (green side) so they pass each other on their port (red) sides. This is a fundamental principle of collision prevention at sea."}},
+  {scenario:{ar:"ربان سفينة تجارية يمر عبر المنطقة الاقتصادية الخالصة الجزائرية، واكتشف وجود شخص يغرق قريباً من سفينته. ماذا يفعل الربان؟",fr:"Le capitaine d'un navire marchand traversant la ZEE algérienne découvre une personne en train de se noyer près de son navire. Que doit faire le capitaine?",en:"The captain of a merchant ship crossing the Algerian EEZ discovers a person drowning near his vessel. What must the captain do?"},
+   options:{ar:["يُبلغ خفر السواحل وينتظر تعليماتهم","يُواصل رحلته لأنه في المنطقة الاقتصادية لا المياه الإقليمية","يبادر فوراً لإنقاذ الشخص ما لم يعرض سفينته لخطر جسيم","ينتظر موافقة شركة التأمين أولاً"],fr:["Informer les gardes-côtes et attendre leurs instructions","Continuer sa route car il est en ZEE et non en eaux territoriales","Procéder immédiatement au sauvetage sauf danger grave pour son navire","Attendre l'accord de la compagnie d'assurance d'abord"],en:["Notify coast guard and wait for instructions","Continue voyage since he's in EEZ not territorial waters","Immediately rescue the person unless it poses serious danger to his vessel","Wait for insurance company approval first"]},
+   correct:2,
+   explanation:{ar:"وفقاً للمادة 98 من اتفاقية UNCLOS 1982 وقوانين البحار الدولية، إنقاذ الأرواح في البحر هو واجب قانوني مطلق يسري في جميع المناطق البحرية. عدم الامتثال يُعرّض الربان للملاحقة الجنائية الدولية.",fr:"Selon l'Article 98 de l'UNCLOS 1982, sauver des vies en mer est une obligation légale absolue qui s'applique dans toutes les zones maritimes. Le non-respect expose le capitaine à des poursuites pénales internationales.",en:"Under UNCLOS 1982 Article 98, saving lives at sea is an absolute legal duty applicable in all maritime zones. Non-compliance exposes the captain to international criminal prosecution."}},
+  {scenario:{ar:"سفينة شراعية وسفينة آلية تسيران في نفس الاتجاه التقريبي، وأصبح مسارهما يتقاطع. أي سفينة يجب أن تتنحى وتتجنب التصادم؟",fr:"Un voilier et un navire à propulsion mécanique naviguent dans des directions similaires, leurs routes se croisent. Quel navire doit s'écarter pour éviter la collision?",en:"A sailing vessel and a power-driven vessel are navigating in similar directions, and their courses are crossing. Which vessel must give way to avoid collision?"},
+   options:{ar:["السفينة الشراعية لأنها أبطأ","السفينة الآلية لأنها الملوث البيئي","ترتيب القرعة يحدد من يتنحى","تتنحى كلتاهما بنفس الدرجة"],fr:["Le voilier car il est plus lent","Le navire à moteur car c'est le pollueur","Un tirage au sort détermine qui cède","Les deux s'écartent de manière égale"],en:["The sailing vessel because it's slower","The power-driven vessel because it's the polluter","A draw determines who gives way","Both give way equally"]},
+   correct:1,
+   explanation:{ar:"وفقاً للقاعدة 18 من COLREGs، السفن الآلية يجب أن تتحاشى السفن الشراعية. الترتيب العام للأولوية هو: سفن عاجزة عن المناورة ← محدودة المناورة ← مشغولة بالصيد ← شراعية ← آلية. السفن الشراعية تتمتع بأولوية على السفن الآلية.",fr:"Selon la Règle 18 des COLREGS, les navires à moteur doivent s'écarter des voiliers. L'ordre général de priorité est: NUC ← RAM ← Pêche ← Voilier ← Moteur. Les voiliers ont la priorité sur les navires à moteur.",en:"Under COLREG Rule 18, power-driven vessels must keep clear of sailing vessels. The general priority order is: NUC ← RAM ← Fishing ← Sailing ← Power-driven. Sailing vessels have right of way over power-driven vessels."}},
+];
+
+const FLAGS_DATA = [
+  {letter:"A",color1:"#1565c0",color2:"#fff",name:{ar:"ألفا",fr:"Alpha",en:"Alpha"},meaning:{ar:"لدي غواص في الماء — تحرك ببطء",fr:"J'ai un plongeur en eau — restez à l'écart lentement",en:"I have a diver down — keep clear, proceed slowly"}},
+  {letter:"B",color1:"#c62828",color2:"#c62828",name:{ar:"برافو",fr:"Bravo",en:"Bravo"},meaning:{ar:"أنا أشحن أو أُفرغ أو أنقل مواد خطرة",fr:"Je charge ou décharge des matières dangereuses",en:"I am loading or discharging or carrying dangerous goods"}},
+  {letter:"C",color1:"#1565c0",color2:"#fff",name:{ar:"تشارلي",fr:"Charlie",en:"Charlie"},meaning:{ar:"نعم / الإشارة إيجابية",fr:"Oui / Affirmatif",en:"Yes / Affirmative"}},
+  {letter:"D",color1:"#f57f17",color2:"#1565c0",name:{ar:"دلتا",fr:"Delta",en:"Delta"},meaning:{ar:"إبق بعيداً — ألاحظ صعوبة في مناورة سفينتي",fr:"Restez à l'écart — j'ai du mal à manœuvrer",en:"Keep clear — I am maneuvering with difficulty"}},
+  {letter:"H",color1:"#fff",color2:"#c62828",name:{ar:"هوتيل",fr:"Hotel",en:"Hotel"},meaning:{ar:"يوجد على متني طبيب / لدي طيار",fr:"J'ai un médecin à bord / Je prends un pilote",en:"I have a doctor on board / I have a pilot on board"}},
+  {letter:"N",color1:"#1565c0",color2:"#fff",name:{ar:"نوفمبر",fr:"November",en:"November"},meaning:{ar:"لا / إشارة سلبية",fr:"Non / Négatif",en:"No / Negative"}},
+  {letter:"O",color1:"#f57f17",color2:"#c62828",name:{ar:"أوسكار",fr:"Oscar",en:"Oscar"},meaning:{ar:"رجل في البحر!",fr:"Homme à la mer!",en:"Man overboard!"}},
+  {letter:"Q",color1:"#f9a825",color2:"#f9a825",name:{ar:"كيبيك",fr:"Quebec",en:"Quebec"},meaning:{ar:"سفينتي سليمة — أطلب رخصة الصحة",fr:"Mon navire est sain — je demande libre pratique",en:"My vessel is healthy — I request free pratique"}},
+  {letter:"W",color1:"#c62828",color2:"#fff",name:{ar:"ويسكي",fr:"Whiskey",en:"Whiskey"},meaning:{ar:"أحتاج مساعدة طبية",fr:"J'ai besoin d'aide médicale",en:"I require medical assistance"}},
+];
+
+let lang = 'ar';
+let currentQuiz = 0;
+let score = 0;
+let answered = false;
+
+function t(key){return T[lang][key]||key}
+
+function setLang(l){
+  lang=l;
+  document.querySelectorAll('.lang-btn').forEach((b,i)=>{
+    b.classList.toggle('active',['ar','fr','en'][i]===l);
+  });
+  document.getElementById('tagline').textContent=t('tagline');
+  document.querySelectorAll('.t[data-key]').forEach(el=>{
+    el.textContent=t(el.dataset.key);
+  });
+  document.getElementById('law-search').placeholder=t('law_search_ph');
+  renderRanks();renderLaws();renderQuiz();renderFlags();renderLawTabs();
+}
+
+function showSection(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+function renderRanks(){
+  const el=document.getElementById('ranks-list');
+  el.innerHTML=RANKS_DATA.map(group=>`
+    <div class="rank-category">${group.cat[lang]}</div>
+    <div class="ranks-grid">
+      ${group.items.map(r=>`
+        <div class="rank-card" onclick="openRank(${JSON.stringify(r).replace(/"/g,'&quot;')})">
+          <div class="rank-badge">${r.badge}</div>
+          <div class="rank-stars">${r.stars}</div>
+          <div class="rank-name">${r.name[lang]}</div>
+          <div class="rank-code">${r.code}</div>
+        </div>
+      `).join('')}
+    </div>
+  `).join('');
+}
+
+function openRank(r){
+  const tasks=r.tasks[lang].map(t=>`<li>${t}</li>`).join('');
+  document.getElementById('modal-content').innerHTML=`
+    <h2>${r.name[lang]}</h2>
+    <div class="modal-badge">${r.badge}</div>
+    <div class="modal-section">
+      <h4>${T[lang].grade}</h4>
+      <p>${r.code} — ${r.stars}</p>
+    </div>
+    <div class="modal-section">
+      <h4>${T[lang].tasks}</h4>
+      <ul>${tasks}</ul>
+    </div>
+    <div class="modal-section">
+      <h4>${T[lang].address}</h4>
+      <p>${r.address[lang]}</p>
+    </div>
+  `;
+  document.getElementById('rank-modal').classList.add('open');
+}
+function closeModal(){document.getElementById('rank-modal').classList.remove('open');}
+
+let activeLawCat='all';
+function renderLawTabs(){
+  const tabs=document.getElementById('law-tabs');
+  const cats=[{key:'all',label:t('cat_all')},...[...new Set(LAWS_DATA.map(l=>l.cat[lang]))].map(c=>({key:c,label:c}))];
+  tabs.innerHTML=cats.map(c=>`<button class="cat-tab ${activeLawCat===c.key?'active':''}" onclick="setLawCat('${c.key}')">${c.label}</button>`).join('');
+}
+function setLawCat(cat){activeLawCat=cat;renderLawTabs();filterLaws();}
+
+function renderLaws(){
+  renderLawTabs();filterLaws();
+}
+function filterLaws(){
+  const q=document.getElementById('law-search').value.toLowerCase();
+  const el=document.getElementById('laws-list');
+  const filtered=LAWS_DATA.filter(l=>{
+    const catMatch=activeLawCat==='all'||l.cat[lang]===activeLawCat;
+    const textMatch=!q||l.num.toLowerCase().includes(q)||l.title[lang].toLowerCase().includes(q)||l.text[lang].toLowerCase().includes(q);
+    return catMatch&&textMatch;
+  });
+  el.innerHTML=filtered.map((l,i)=>`
+    <div class="law-item" onclick="this.classList.toggle('expanded')">
+      <div class="law-item-header">
+        <span class="law-number">${l.num}</span>
+        <span class="law-title">${l.title[lang]}</span>
+        <span class="law-cat-badge">${l.cat[lang]}</span>
+      </div>
+      <div class="law-body">${l.text[lang]}</div>
+    </div>
+  `).join('')||`<p style="color:var(--muted);text-align:center;padding:2rem">لا توجد نتائج</p>`;
+}
+
+function renderQuiz(){
+  const qz=QUIZ_DATA[currentQuiz];
+  const el=document.getElementById('quiz-container');
+  const opts=qz.options[lang].map((o,i)=>`
+    <div class="quiz-option" id="opt-${i}" onclick="answerQuiz(${i})">${o}</div>
+  `).join('');
+  el.innerHTML=`
+    <div class="score-bar">
+      <span class="score-label">${t('score')}:</span>
+      <span class="score-val">${score}/${QUIZ_DATA.length}</span>
+      <span class="score-label" style="margin-left:auto">${currentQuiz+1}/${QUIZ_DATA.length}</span>
+    </div>
+    <div class="scenario-box">
+      <div class="scenario-label">⚖️ ${lang==='ar'?'سيناريو':lang==='fr'?'Scénario':'Scenario'}</div>
+      <p class="scenario-text">${qz.scenario[lang]}</p>
+    </div>
+    <div class="quiz-options">${opts}</div>
+    <div class="quiz-result" id="quiz-result"></div>
+    <button class="next-btn" id="next-btn" onclick="nextQuiz()">${t('next')}</button>
+  `;
+  answered=false;
+}
+
+function answerQuiz(idx){
+  if(answered)return;
+  answered=true;
+  const qz=QUIZ_DATA[currentQuiz];
+  const opts=document.querySelectorAll('.quiz-option');
+  opts.forEach(o=>o.classList.add('disabled'));
+  const isCorrect=idx===qz.correct;
+  if(isCorrect){score++;opts[idx].classList.add('correct');}
+  else{opts[idx].classList.add('wrong');opts[qz.correct].classList.add('correct');}
+  const res=document.getElementById('quiz-result');
+  res.innerHTML=`<strong>${isCorrect?t('correct_ans'):t('wrong_ans')}</strong><br><br>${qz.explanation[lang]}`;
+  res.classList.add('show');
+  const nb=document.getElementById('next-btn');
+  if(nb)nb.classList.add('show');
+}
+
+function nextQuiz(){
+  currentQuiz=(currentQuiz+1)%QUIZ_DATA.length;
+  if(currentQuiz===0)score=0;
+  renderQuiz();
+}
+
+function renderFlags(){
+  const colors=[['#1565c0','#fff'],['#c62828','#fff'],['#1565c0','#c62828'],['#f57f17','#1565c0'],['#fff','#c62828'],['#1565c0','#fff'],['#f57f17','#c62828'],['#f9a825','#fff'],['#c62828','#fff']];
+  const el=document.getElementById('flags-grid');
+  el.innerHTML=FLAGS_DATA.map((f,i)=>{
+    const [c1,c2]=colors[i%colors.length];
+    return`
+      <div class="flag-card">
+        <div class="flag-visual" style="background:linear-gradient(90deg,${c1} 50%,${c2} 50%)">
+          <span style="font-size:18px;font-weight:900;color:${c1==="#fff"?"#1565c0":"#fff"};text-shadow:1px 1px 3px rgba(0,0,0,0.5)">${f.letter}</span>
+        </div>
+        <div class="flag-letter">${f.name[lang]}</div>
+        <div class="flag-name" style="font-size:10px;margin-top:2px">${f.letter}</div>
+        <div class="flag-meaning">${f.meaning[lang]}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+document.getElementById('law-search').placeholder=t('law_search_ph');
+renderRanks();renderLaws();renderQuiz();renderFlags();
+document.getElementById('rank-modal').addEventListener('click',function(e){if(e.target===this)closeModal();});
+</script>
