@@ -9,15 +9,14 @@
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 :root{--navy:#0d1b2e;--navy2:#152540;--navy3:#1e3a5f;--gold:#d4a843;--gold2:#f0c96a;--white:#eef2ff;--muted:#7a8bad;--accent:#5bc8f5;--green:#4caf7d;--red:#ef5350;--card:rgba(255,255,255,0.06);--border:rgba(212,168,67,0.25)}
 html,body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:var(--navy);color:var(--white);min-height:100vh;overflow-x:hidden;font-size:16px}
-
-.app{max-width:480px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;position:relative;background:var(--navy)}
+.app{max-width:480px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;background:var(--navy)}
 
 /* HEADER */
 .hdr{background:var(--navy2);border-bottom:2px solid var(--gold);padding:12px 14px 10px;position:sticky;top:0;z-index:100}
 .hdr-row{display:flex;align-items:center;justify-content:space-between}
 .logo{display:flex;align-items:center;gap:10px}
 .logo-ico{width:42px;height:42px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:var(--navy);flex-shrink:0}
-.logo-t1{font-size:18px;font-weight:800;color:var(--gold);line-height:1.1}
+.logo-t1{font-size:18px;font-weight:800;color:var(--gold)}
 .logo-t2{font-size:10px;color:var(--muted);letter-spacing:1.5px}
 .langs{display:flex;gap:5px}
 .lb{padding:5px 11px;border:1.5px solid var(--gold);background:transparent;color:var(--gold);border-radius:20px;cursor:pointer;font-size:11px;font-weight:700;transition:all .2s}
@@ -25,10 +24,7 @@ html,body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-ser
 
 /* SCROLL */
 .scroll{flex:1;overflow-y:auto;padding:14px 13px 85px;-webkit-overflow-scrolling:touch}
-
-/* SECTIONS */
-.sec{display:none}
-.sec.on{display:block}
+.sec{display:none}.sec.on{display:block}
 .sec-h{margin-bottom:14px}
 .sec-h h2{font-size:20px;font-weight:800}
 .sec-h p{font-size:12px;color:var(--muted);margin-top:3px}
@@ -39,40 +35,51 @@ html,body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-ser
 .nb.on{color:var(--gold);border-top-color:var(--gold)}
 .ni{font-size:22px;line-height:1}
 
+/* DISCLAIMER */
+.disc-box{background:rgba(91,200,245,0.08);border:1px solid rgba(91,200,245,0.3);border-radius:12px;padding:12px 14px;margin-bottom:16px;font-size:12px;color:var(--muted);line-height:1.7}
+.disc-box strong{color:var(--accent);font-size:11px;letter-spacing:1px;display:block;margin-bottom:4px}
+
 /* HOME */
 .hero{background:linear-gradient(150deg,var(--navy2),var(--navy3));border-radius:20px;padding:28px 20px;text-align:center;border:1px solid var(--border);margin-bottom:16px}
 .hero-ico{font-size:54px;margin-bottom:12px}
 .hero h1{font-size:24px;font-weight:900;color:var(--gold);margin-bottom:8px}
 .hero p{font-size:13px;color:var(--muted);line-height:1.65}
 .qgrid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
-.qcard{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px 12px;text-align:center;cursor:pointer;transition:transform .15s;-webkit-user-select:none}
+.qcard{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px 12px;text-align:center;cursor:pointer;transition:transform .15s}
 .qcard:active{transform:scale(.95)}
 .qc-ico{font-size:32px;margin-bottom:8px}
 .qc-t{font-size:14px;font-weight:700}
 .qc-s{font-size:11px;color:var(--muted);margin-top:3px}
-.badge{display:inline-block;background:var(--gold);color:var(--navy);font-size:9px;font-weight:800;padding:2px 8px;border-radius:10px;margin-top:5px}
+.badge-new{display:inline-block;background:var(--gold);color:var(--navy);font-size:9px;font-weight:800;padding:2px 8px;border-radius:10px;margin-top:5px}
 
-/* RANKS */
-.rcat{font-size:11px;font-weight:700;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin:16px 0 8px;padding-right:10px;border-right:3px solid var(--gold)}
-.rgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.rcard{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 10px;text-align:center;cursor:pointer;transition:transform .15s}
+/* ===== RANK CARDS ===== */
+.rcat-wrap{margin-bottom:20px}
+.rcat-label{font-size:11px;font-weight:700;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin:0 0 10px;padding-right:10px;border-right:3px solid var(--gold);display:flex;align-items:center;gap:6px}
+.rgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+/* 2-col for generals since fewer */
+.rgrid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rcard{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 8px 10px;text-align:center;cursor:pointer;transition:transform .15s;display:flex;flex-direction:column;align-items:center}
 .rcard:active{transform:scale(.95)}
-.rb{font-size:32px;margin-bottom:5px}
-.rs{color:var(--gold);font-size:9px;letter-spacing:2px}
-.rn{font-size:13px;font-weight:700;margin-top:6px}
-.rc{font-size:10px;color:var(--muted);margin-top:2px}
+
+/* SVG EPAULETTE */
+.epaulette-wrap{width:64px;height:80px;margin:0 auto 8px;position:relative}
+.epaulette-wrap svg{width:100%;height:100%;filter:drop-shadow(0 2px 4px rgba(0,0,0,.5))}
+.rn{font-size:11px;font-weight:700;color:var(--white);line-height:1.3;margin-top:2px}
+.rfr{font-size:9px;color:var(--muted);margin-top:2px;font-style:italic}
 
 /* MODAL */
-.mwrap{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:200;align-items:flex-end;justify-content:center}
+.mwrap{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:200;align-items:flex-end;justify-content:center}
 .mwrap.on{display:flex}
 .mbox{background:var(--navy2);border:2px solid var(--gold);border-radius:24px 24px 0 0;padding:18px 16px 30px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto}
 .mdrag{width:40px;height:4px;background:var(--muted);border-radius:2px;margin:0 auto 14px}
 .mbox h2{font-size:20px;font-weight:800;color:var(--gold)}
-.mbig{font-size:58px;text-align:center;margin:12px 0}
+.modal-ep{display:flex;justify-content:center;margin:14px 0}
+.modal-ep svg{width:90px;height:112px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.6))}
 .minf{background:rgba(255,255,255,.05);border-radius:12px;padding:12px 14px;margin-top:10px;border-right:3px solid var(--gold)}
 .minf h4{font-size:10px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px}
-.minf p,.minf ul{font-size:13px;color:var(--muted);line-height:1.75}
-.minf ul{padding-right:1.1rem}
+.minf p{font-size:13px;color:var(--muted);line-height:1.7}
+.minf .fr-nm{color:var(--accent);font-style:italic;font-size:12px;margin-top:3px}
+.minf .en-nm{color:var(--muted);font-style:italic;font-size:12px;margin-top:2px}
 .mcls{width:100%;margin-top:16px;padding:14px;background:var(--gold);color:var(--navy);border:none;border-radius:12px;font-size:16px;font-weight:800;cursor:pointer}
 
 /* LAWS */
@@ -87,19 +94,20 @@ html,body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-ser
 .ctab.on{background:var(--gold);color:var(--navy);border-color:var(--gold)}
 .lcard{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:10px;cursor:pointer}
 .lhdr{display:flex;align-items:flex-start;gap:8px}
-.lnum{background:rgba(212,168,67,.18);color:var(--gold);font-size:10px;font-weight:800;padding:3px 8px;border-radius:6px;white-space:nowrap;margin-top:2px}
+.lnum{background:rgba(212,168,67,.18);color:var(--gold);font-size:10px;font-weight:800;padding:3px 8px;border-radius:6px;white-space:nowrap;flex-shrink:0}
 .lttl{font-size:14px;font-weight:700;flex:1;line-height:1.4}
-.larr{color:var(--muted);font-size:14px;transition:transform .2s;flex-shrink:0;margin-top:2px}
+.larr{color:var(--muted);font-size:14px;transition:transform .2s;flex-shrink:0}
 .lcard.exp .larr{transform:rotate(180deg)}
 .lcatb{font-size:9px;color:var(--muted);background:rgba(255,255,255,.07);padding:2px 7px;border-radius:10px;margin-top:5px;display:inline-block}
+.lref{font-size:10px;color:var(--accent);margin-right:6px}
 .lbody{font-size:13px;color:var(--muted);line-height:1.8;margin-top:10px;border-top:1px solid rgba(255,255,255,.08);padding-top:10px;display:none}
 .lcard.exp .lbody{display:block}
+.ref-tag{font-size:11px;color:var(--accent);font-weight:600;margin-top:8px;display:block}
 
 /* QUIZ */
 .srow{display:flex;align-items:center;justify-content:space-between;background:var(--card);border-radius:12px;padding:12px 16px;margin-bottom:16px}
 .slbl{font-size:12px;color:var(--muted)}
 .snum{font-size:26px;font-weight:900;color:var(--gold)}
-.sprog{font-size:12px;color:var(--muted)}
 .sccard{background:var(--navy3);border:1.5px solid rgba(91,200,245,.35);border-radius:16px;padding:16px;margin-bottom:16px}
 .sclab{font-size:10px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;font-weight:700}
 .sctxt{font-size:14px;line-height:1.8}
@@ -114,24 +122,19 @@ html,body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-ser
 .rcard2 strong{color:var(--gold)}
 .nxtbtn{width:100%;padding:14px;background:var(--gold);color:var(--navy);border:none;border-radius:12px;font-size:16px;font-weight:800;cursor:pointer;display:none}
 .nxtbtn.on{display:block}
-.nxtbtn:active{transform:scale(.97)}
 
 /* FLAGS */
 .fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .fcard{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 6px;text-align:center}
-.fvis{width:64px;height:44px;margin:0 auto 8px;border-radius:6px;overflow:hidden;border:1px solid rgba(255,255,255,.15);position:relative;display:flex;align-items:center;justify-content:center}
-.fl{font-size:20px;font-weight:900;color:#fff;text-shadow:1px 1px 4px rgba(0,0,0,.7);position:relative;z-index:1}
+.fvis{width:64px;height:44px;margin:0 auto 8px;border-radius:6px;overflow:hidden;border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center}
+.fl{font-size:20px;font-weight:900;color:#fff;text-shadow:1px 1px 4px rgba(0,0,0,.7)}
 .fltr{font-size:15px;font-weight:800;color:var(--gold)}
 .fnm{font-size:10px;font-weight:600;margin-top:2px}
 .fmn{font-size:9px;color:var(--muted);margin-top:3px;line-height:1.4}
-
-@media(prefers-color-scheme:dark){body{background:var(--navy)}}
 </style>
 </head>
 <body>
 <div class="app">
-
-  <!-- HEADER -->
   <div class="hdr">
     <div class="hdr-row">
       <div class="logo">
@@ -149,7 +152,6 @@ html,body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-ser
     </div>
   </div>
 
-  <!-- CONTENT -->
   <div class="scroll">
 
     <!-- HOME -->
@@ -157,25 +159,35 @@ html,body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-ser
       <div class="hero">
         <div class="hero-ico">⚓</div>
         <h1>NaviLex DZ</h1>
-        <p class="tk" data-k="hdesc">المرشد البحري الرقمي الجزائري — الرتب، القوانين، المحاكاة، والإشارات البحرية</p>
+        <p class="tk" data-k="hdesc"></p>
+      </div>
+      <div class="disc-box">
+        <strong>⚠️ <span class="tk" data-k="disc_title"></span></strong>
+        <span class="tk" data-k="disc"></span>
       </div>
       <div class="qgrid">
-        <div class="qcard" onclick="goS('ranks')"><div class="qc-ico">🎖️</div><div class="qc-t tk" data-k="nav_r">الرتب</div><div class="qc-s">8 <span class="tk" data-k="r_cnt">رتبة بحرية</span></div></div>
-        <div class="qcard" onclick="goS('laws')"><div class="qc-ico">📜</div><div class="qc-t tk" data-k="nav_l">القوانين</div><div class="qc-s">6 <span class="tk" data-k="l_cnt">مواد قانونية</span></div></div>
-        <div class="qcard" onclick="goS('quiz')"><div class="qc-ico">🧩</div><div class="qc-t tk" data-k="nav_q">المحاكاة</div><div><span class="badge tk" data-k="b_new">جديد</span></div></div>
-        <div class="qcard" onclick="goS('flags')"><div class="qc-ico">🚩</div><div class="qc-t tk" data-k="nav_f">الإشارات</div><div class="qc-s">9 <span class="tk" data-k="f_cnt">أعلام دولية</span></div></div>
+        <div class="qcard" onclick="goS('ranks')"><div class="qc-ico">🎖️</div><div class="qc-t tk" data-k="nav_r">الرتب</div><div class="qc-s">18 <span class="tk" data-k="r_cnt">رتبة رسمية</span></div></div>
+        <div class="qcard" onclick="goS('laws')"><div class="qc-ico">📜</div><div class="qc-t tk" data-k="nav_l">القوانين</div><div class="qc-s">6 <span class="tk" data-k="l_cnt">مواد</span></div></div>
+        <div class="qcard" onclick="goS('quiz')"><div class="qc-ico">🧩</div><div class="qc-t tk" data-k="nav_q">المحاكاة</div><div><span class="badge-new tk" data-k="b_new">جديد</span></div></div>
+        <div class="qcard" onclick="goS('flags')"><div class="qc-ico">🚩</div><div class="qc-t tk" data-k="nav_f">الإشارات</div><div class="qc-s">9 <span class="tk" data-k="f_cnt">أعلام</span></div></div>
       </div>
     </div>
 
     <!-- RANKS -->
     <div class="sec" id="s-ranks">
-      <div class="sec-h"><h2 class="tk" data-k="rt">التسلسل الهرمي للرتب</h2><p class="tk" data-k="rs">اضغط على رتبة لعرض تفاصيلها</p></div>
+      <div class="sec-h">
+        <h2 class="tk" data-k="rt">التسلسل الهرمي للرتب</h2>
+        <p class="tk" data-k="rs">الجيش الوطني الشعبي — القوات البحرية الجزائرية</p>
+      </div>
       <div id="ranks-list"></div>
     </div>
 
     <!-- LAWS -->
     <div class="sec" id="s-laws">
-      <div class="sec-h"><h2 class="tk" data-k="lt">موسوعة القوانين البحرية</h2><p class="tk" data-k="ls">ابحث برقم المادة أو بالكلمة</p></div>
+      <div class="sec-h">
+        <h2 class="tk" data-k="lt">موسوعة القوانين البحرية</h2>
+        <p class="tk" data-k="ls">ابحث برقم المادة أو بالكلمة</p>
+      </div>
       <div class="sbar"><span class="sico">🔍</span><input id="lsrc" type="search" placeholder="" oninput="filtL()"></div>
       <div class="ctabs" id="ctabs"></div>
       <div id="laws-list"></div>
@@ -183,19 +195,28 @@ html,body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-ser
 
     <!-- QUIZ -->
     <div class="sec" id="s-quiz">
-      <div class="sec-h"><h2 class="tk" data-k="qt">المحاكاة القانونية</h2><p class="tk" data-k="qs">سيناريوهات بحرية حقيقية</p></div>
+      <div class="sec-h">
+        <h2 class="tk" data-k="qt">المحاكاة القانونية</h2>
+        <p class="tk" data-k="qs">سيناريوهات بحرية حقيقية</p>
+      </div>
       <div id="quiz-body"></div>
     </div>
 
     <!-- FLAGS -->
     <div class="sec" id="s-flags">
-      <div class="sec-h"><h2 class="tk" data-k="ft">الإشارات الدولية</h2><p class="tk" data-k="fs">أعلام الإشارات ومعانيها القانونية</p></div>
+      <div class="sec-h">
+        <h2 class="tk" data-k="ft">الإشارات الدولية</h2>
+        <p class="tk" data-k="fs">أعلام الإشارات ومعانيها القانونية</p>
+      </div>
+      <div class="disc-box" style="margin-bottom:14px">
+        <strong>📖 <span class="tk" data-k="flag_ref_t"></span></strong>
+        <span class="tk" data-k="flag_ref"></span>
+      </div>
       <div class="fgrid" id="fgrid"></div>
     </div>
 
   </div>
 
-  <!-- BOTTOM NAV -->
   <nav class="bnav">
     <button class="nb on" onclick="goS('home',0)"><span class="ni">🏠</span><span class="tk" data-k="nav_h">الرئيسية</span></button>
     <button class="nb" onclick="goS('ranks',1)"><span class="ni">🎖️</span><span class="tk" data-k="nav_r">الرتب</span></button>
@@ -215,67 +236,296 @@ html,body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-ser
 </div>
 
 <script>
+/* ============ TRANSLATIONS ============ */
 const T={
-  ar:{tagline:"المرشد البحري الرقمي",hdesc:"المرشد البحري الرقمي الجزائري — الرتب، القوانين، المحاكاة، والإشارات",nav_h:"الرئيسية",nav_r:"الرتب",nav_l:"القوانين",nav_q:"المحاكاة",nav_f:"الإشارات",r_cnt:"رتبة بحرية",l_cnt:"مواد قانونية",f_cnt:"أعلام دولية",b_new:"جديد",rt:"التسلسل الهرمي للرتب",rs:"اضغط على رتبة لعرض تفاصيلها",lt:"موسوعة القوانين البحرية",ls:"ابحث برقم المادة أو بالكلمة",qt:"المحاكاة القانونية",qs:"سيناريوهات بحرية حقيقية",ft:"الإشارات الدولية",fs:"أعلام الإشارات ومعانيها القانونية",grade:"الدرجة",tasks:"المهام والمسؤوليات",addr:"طريقة المخاطبة",close:"إغلاق",cat_all:"الكل",correct:"✓ إجابة صحيحة",wrong:"✗ إجابة خاطئة",nxt:"السؤال التالي →",slbl:"النتيجة",sph:"ابحث عن مادة أو كلمة..."},
-  fr:{tagline:"Le Guide Maritime Numérique",hdesc:"Guide Maritime Numérique Algérien — Grades, Lois, Simulation, Signaux",nav_h:"Accueil",nav_r:"Grades",nav_l:"Lois",nav_q:"Simulation",nav_f:"Signaux",r_cnt:"grades navals",l_cnt:"articles juridiques",f_cnt:"pavillons internationaux",b_new:"Nouveau",rt:"Hiérarchie des Grades Navals",rs:"Touchez un grade pour voir les détails",lt:"Encyclopédie du Droit Maritime",ls:"Recherchez par numéro ou mot-clé",qt:"Simulation Juridique",qs:"Scénarios maritimes réels",ft:"Signaux Maritimes Internationaux",fs:"Pavillons et leurs significations",grade:"Grade",tasks:"Missions et Responsabilités",addr:"Forme d'adresse",close:"Fermer",cat_all:"Tout",correct:"✓ Bonne réponse",wrong:"✗ Mauvaise réponse",nxt:"Question suivante →",slbl:"Score",sph:"Rechercher un article ou mot-clé..."},
-  en:{tagline:"Digital Maritime Guide",hdesc:"Algerian Digital Maritime Guide — Ranks, Laws, Simulation, Signals",nav_h:"Home",nav_r:"Ranks",nav_l:"Laws",nav_q:"Simulation",nav_f:"Signals",r_cnt:"naval ranks",l_cnt:"legal articles",f_cnt:"international flags",b_new:"New",rt:"Naval Ranks Hierarchy",rs:"Tap a rank to view details",lt:"Maritime Law Encyclopedia",ls:"Search by article number or keyword",qt:"Legal Simulation",qs:"Real maritime scenarios",ft:"International Maritime Signals",fs:"Signal flags and their meanings",grade:"Grade",tasks:"Duties & Responsibilities",addr:"Form of Address",close:"Close",cat_all:"All",correct:"✓ Correct answer",wrong:"✗ Wrong answer",nxt:"Next question →",slbl:"Score",sph:"Search for an article or keyword..."}
+  ar:{
+    tagline:"المرشد البحري الرقمي",
+    hdesc:"المرشد البحري الرقمي الجزائري — الرتب الرسمية، القوانين الدولية، المحاكاة، والإشارات البحرية",
+    disc_title:"إخلاء مسؤولية",
+    disc:"المعلومات الواردة للأغراض التعليمية والإرشادية فقط. المرجع الأساسي هو النصوص القانونية الرسمية للاتفاقيات الدولية والقوانين الجزائرية النافذة.",
+    nav_h:"الرئيسية",nav_r:"الرتب",nav_l:"القوانين",nav_q:"المحاكاة",nav_f:"الإشارات",
+    r_cnt:"رتبة رسمية",l_cnt:"مواد",f_cnt:"أعلام",b_new:"جديد",
+    rt:"التسلسل الهرمي للرتب",rs:"الجيش الوطني الشعبي — القوات البحرية الجزائرية",
+    lt:"موسوعة القوانين البحرية",ls:"ابحث برقم المادة أو بالكلمة",
+    qt:"المحاكاة القانونية",qs:"سيناريوهات بحرية حقيقية",
+    ft:"الإشارات الدولية",fs:"أعلام الإشارات ومعانيها القانونية",
+    grade:"الرتبة",addr:"طريقة المخاطبة الرسمية",
+    close:"إغلاق",cat_all:"الكل",
+    correct:"✓ إجابة صحيحة",wrong:"✗ إجابة خاطئة",
+    nxt:"السؤال التالي →",slbl:"النتيجة",sph:"ابحث عن مادة أو كلمة...",
+    flag_ref_t:"المرجع",flag_ref:"الكود الدولي للإشارات (International Code of Signals) — المنظمة البحرية الدولية IMO."
+  },
+  fr:{
+    tagline:"Le Guide Maritime Numérique",
+    hdesc:"Guide Maritime Numérique Algérien — Grades officiels, Droit international, Simulation, Signaux maritimes",
+    disc_title:"Avertissement",
+    disc:"Les informations sont à des fins éducatives uniquement. La référence officielle reste les textes juridiques des conventions internationales (COLREGs, UNCLOS, SOLAS) et les lois algériennes en vigueur.",
+    nav_h:"Accueil",nav_r:"Grades",nav_l:"Lois",nav_q:"Simulation",nav_f:"Signaux",
+    r_cnt:"grades officiels",l_cnt:"articles",f_cnt:"pavillons",b_new:"Nouveau",
+    rt:"Hiérarchie des Grades",rs:"Armée Nationale Populaire — Forces Navales Algériennes",
+    lt:"Encyclopédie du Droit Maritime",ls:"Recherche par numéro ou mot-clé",
+    qt:"Simulation Juridique",qs:"Scénarios maritimes réels",
+    ft:"Signaux Maritimes Internationaux",fs:"Pavillons et significations juridiques",
+    grade:"Grade",addr:"Forme d'adresse officielle",
+    close:"Fermer",cat_all:"Tout",
+    correct:"✓ Bonne réponse",wrong:"✗ Mauvaise réponse",
+    nxt:"Question suivante →",slbl:"Score",sph:"Rechercher un article ou mot-clé...",
+    flag_ref_t:"Référence",flag_ref:"Code International des Signaux — Organisation Maritime Internationale (OMI)."
+  },
+  en:{
+    tagline:"Digital Maritime Guide",
+    hdesc:"Algerian Digital Maritime Guide — Official Ranks, International Law, Simulation, Maritime Signals",
+    disc_title:"Disclaimer",
+    disc:"Information is for educational purposes only. The official reference remains the legal texts of international conventions (COLREGs, UNCLOS, SOLAS) and applicable Algerian national laws.",
+    nav_h:"Home",nav_r:"Ranks",nav_l:"Laws",nav_q:"Simulation",nav_f:"Signals",
+    r_cnt:"official ranks",l_cnt:"articles",f_cnt:"flags",b_new:"New",
+    rt:"Ranks Hierarchy",rs:"National People's Army — Algerian Naval Forces",
+    lt:"Maritime Law Encyclopedia",ls:"Search by article number or keyword",
+    qt:"Legal Simulation",qs:"Real maritime scenarios",
+    ft:"International Maritime Signals",fs:"Signal flags and their legal meanings",
+    grade:"Rank",addr:"Official form of address",
+    close:"Close",cat_all:"All",
+    correct:"✓ Correct answer",wrong:"✗ Wrong answer",
+    nxt:"Next question →",slbl:"Score",sph:"Search for an article or keyword...",
+    flag_ref_t:"Reference",flag_ref:"International Code of Signals — International Maritime Organization (IMO)."
+  }
 };
 
+/* ============ SVG EPAULETTE BUILDER ============ */
+/* 
+  Draws a realistic military epaulette shape in SVG.
+  bg = background color, stripes = array of stripe colors (horizontal bars for enlisted),
+  stars = number of gold stars, anchor = show navy anchor symbol,
+  eagle = show general eagle symbol, cross_swords = show crossed swords (generals)
+*/
+function epSVG(cfg, small=false){
+  const W=small?64:90, H=small?80:112;
+  const {bg='#1a1a2e', stripes=[], stars=0, anchor=false, eagle=false, vstripes=0, chevrons=0} = cfg;
+  const cx=W/2, gold='#d4a843', dark='#0a1020';
+
+  let shapes='';
+
+  // Epaulette body shape
+  shapes += `<defs>
+    <clipPath id="ep${W}">
+      <path d="M${W*0.1},${H*0.18} L${W*0.9},${H*0.18} L${W*0.95},${H*0.7} Q${W*0.95},${H*0.92} ${cx},${H*0.97} Q${W*0.05},${H*0.92} ${W*0.05},${H*0.7} Z"/>
+    </clipPath>
+  </defs>`;
+
+  // Shadow / body
+  shapes += `<path d="M${W*0.1},${H*0.18} L${W*0.9},${H*0.18} L${W*0.95},${H*0.7} Q${W*0.95},${H*0.92} ${cx},${H*0.97} Q${W*0.05},${H*0.92} ${W*0.05},${H*0.7} Z" fill="${bg}" stroke="${gold}" stroke-width="1.5"/>`;
+
+  // Top button circle
+  shapes += `<circle cx="${cx}" cy="${H*0.14}" r="${W*0.13}" fill="${gold}"/>`;
+  shapes += `<circle cx="${cx}" cy="${H*0.14}" r="${W*0.08}" fill="${dark}"/>`;
+  shapes += `<circle cx="${cx}" cy="${H*0.14}" r="${W*0.04}" fill="${gold}"/>`;
+
+  // Horizontal gold stripes (sous-officiers)
+  if(stripes.length>0){
+    const stripeH = H*0.045;
+    const startY = H*0.72 - (stripes.length-1)*(stripeH+2);
+    stripes.forEach((col,i)=>{
+      shapes += `<rect x="${W*0.1}" y="${startY + i*(stripeH+2)}" width="${W*0.8}" height="${stripeH}" fill="${col}" clip-path="url(#ep${W})"/>`;
+    });
+  }
+
+  // Chevrons (rjal alsaf - V shapes)
+  if(chevrons>0){
+    const cy_base = H*0.75;
+    for(let i=0;i<chevrons;i++){
+      const y = cy_base - i*10;
+      shapes += `<polyline points="${W*0.2},${y} ${cx},${y-10} ${W*0.8},${y}" fill="none" stroke="${gold}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#ep${W})"/>`;
+    }
+  }
+
+  // Vertical stripe (navy distinction — red stripe)
+  if(vstripes>0){
+    shapes += `<rect x="${cx-2}" y="${H*0.22}" width="4" height="${H*0.6}" fill="#c62828" clip-path="url(#ep${W})"/>`;
+  }
+
+  // Navy Anchor (for enlisted & petty officers)
+  if(anchor){
+    const as = small ? 0.28 : 0.30;
+    const ay = H*0.52;
+    shapes += `<text x="${cx}" y="${ay}" text-anchor="middle" font-size="${W*as}" fill="${gold}" opacity="0.9">⚓</text>`;
+  }
+
+  // Stars (officers)
+  if(stars>0){
+    const sr = small ? 5 : 7;
+    const starY = H*0.65;
+    const positions = starPositions(stars, cx, starY, sr*2.4, W, H);
+    positions.forEach(([sx,sy])=>{
+      shapes += drawStar(sx, sy, sr, gold);
+    });
+  }
+
+  // Eagle / general symbol
+  if(eagle){
+    const ey = H*0.58;
+    const es = small ? 0.30 : 0.32;
+    shapes += `<text x="${cx}" y="${ey}" text-anchor="middle" font-size="${W*es}" fill="${gold}">🦅</text>`;
+  }
+
+  // Crossed swords under eagle (generals)
+  if(cfg.swords){
+    const sy2 = H*0.80;
+    const es2 = small ? 0.22 : 0.24;
+    shapes += `<text x="${cx}" y="${sy2}" text-anchor="middle" font-size="${W*es2}" fill="${gold}">⚔️</text>`;
+  }
+
+  return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">${shapes}</svg>`;
+}
+
+function starPositions(n, cx, baseY, gap, W, H){
+  if(n===1) return [[cx, baseY]];
+  if(n===2) return [[cx-gap*0.5, baseY],[cx+gap*0.5, baseY]];
+  if(n===3) return [[cx, baseY-gap*0.5],[cx-gap*0.55,baseY+gap*0.35],[cx+gap*0.55,baseY+gap*0.35]];
+  if(n===4) return [[cx-gap*0.55,baseY-gap*0.4],[cx+gap*0.55,baseY-gap*0.4],[cx-gap*0.55,baseY+gap*0.4],[cx+gap*0.55,baseY+gap*0.4]];
+  // fallback
+  return [[cx, baseY]];
+}
+
+function drawStar(x, y, r, color){
+  const pts=[];
+  for(let i=0;i<5;i++){
+    const a=Math.PI/180*(i*72-90);
+    const a2=Math.PI/180*(i*72-90+36);
+    pts.push(`${x+r*Math.cos(a)},${y+r*Math.sin(a)}`);
+    pts.push(`${x+r*0.4*Math.cos(a2)},${y+r*0.4*Math.sin(a2)}`);
+  }
+  return `<polygon points="${pts.join(' ')}" fill="${color}"/>`;
+}
+
+/* ============ RANKS DATA — الهيكل الرسمي الكامل ============ */
 const RANKS=[
-  {cat:{ar:"رجال الصف",fr:"Sous-officiers mariniers",en:"Enlisted Sailors"},items:[
-    {b:"⚓",s:"★",n:{ar:"بحار",fr:"Matelot",en:"Seaman"},c:"E-1",t:{ar:["تنفيذ أوامر المشرفين","صيانة معدات السفينة","المناوبات والحراسة","المشاركة في عمليات الإنقاذ"],fr:["Exécuter les ordres des supérieurs","Entretenir les équipements du navire","Assurer les gardes et les quarts","Participer aux opérations de sauvetage"],en:["Execute orders from supervisors","Maintain ship equipment","Stand watches and guard duty","Participate in rescue operations"]},a:{ar:"بحار + الاسم",fr:"Matelot + Nom",en:"Seaman + Name"}},
-    {b:"⚓",s:"★★",n:{ar:"بحار أول",fr:"Matelot 1ère classe",en:"Seaman 1st Class"},c:"E-2",t:{ar:["مساعدة في أنظمة الملاحة","الإشراف على البحارة الأقل رتبة","صيانة الأنظمة الكهربائية","المشاركة في التدريبات"],fr:["Aider à opérer les systèmes de navigation","Superviser les matelots subalternes","Entretenir les systèmes électriques","Participer aux exercices"],en:["Assist navigation systems operation","Supervise lower-rank sailors","Maintain electrical systems","Participate in training exercises"]},a:{ar:"بحار أول + الاسم",fr:"Matelot 1ère Classe + Nom",en:"Seaman First Class + Name"}}
-  ]},
-  {cat:{ar:"ضباط الصف",fr:"Officiers mariniers",en:"Petty Officers"},items:[
-    {b:"🔱",s:"★★★",n:{ar:"وكيل بحري",fr:"Second-maître",en:"Petty Officer"},c:"O-1",t:{ar:["قيادة فرق العمل الصغيرة","الإشراف على التدريبات","تقديم تقارير للضباط","إدارة مخازن السفينة"],fr:["Commander de petites équipes","Superviser les entraînements","Soumettre des rapports aux officiers","Gérer les réserves du navire"],en:["Lead small work teams","Supervise training exercises","Submit reports to officers","Manage ship stores and supplies"]},a:{ar:"وكيل",fr:"Second-maître",en:"Petty Officer"}},
-    {b:"🔱",s:"★★★★",n:{ar:"ملازم بحري",fr:"Enseigne de vaisseau",en:"Ensign"},c:"O-2",t:{ar:["ضابط مناوب على الجسر","إدارة قسم من السفينة","الإشراف على ضباط الصف","كتابة تقارير الملاحة"],fr:["Officier de quart sur la passerelle","Gérer une section du navire","Superviser les officiers mariniers","Rédiger des rapports de navigation"],en:["Officer of the watch on bridge","Manage a ship section","Supervise petty officers","Write navigation reports"]},a:{ar:"سيدي الملازم",fr:"Mon Enseigne",en:"Sir / Ma'am"}}
-  ]},
-  {cat:{ar:"الضباط",fr:"Officiers",en:"Officers"},items:[
-    {b:"🌟",s:"★★★★★",n:{ar:"نقيب بحري",fr:"Lieutenant de vaisseau",en:"Lieutenant"},c:"O-3",t:{ar:["قيادة وحدة أو سفينة صغيرة","الإشراف على عمليات الملاحة","التخطيط للمهام التكتيكية","التحقيق في الحوادث البحرية"],fr:["Commander une unité ou petit navire","Superviser les opérations de navigation","Planifier les missions tactiques","Enquêter sur les incidents maritimes"],en:["Command a unit or small vessel","Supervise navigation operations","Plan tactical missions","Conduct maritime incident investigations"]},a:{ar:"سيدي النقيب",fr:"Mon Lieutenant",en:"Lieutenant"}},
-    {b:"🌟",s:"★★★★★★",n:{ar:"مقدم بحري",fr:"Capitaine de corvette",en:"Commander"},c:"O-4",t:{ar:["قيادة سفينة حربية متوسطة","رسم خطط الملاحة والمناورات","الإشراف على جميع ضباط السفينة","التنسيق مع القيادة العليا"],fr:["Commander un navire de guerre moyen","Tracer les plans de navigation et manœuvres","Superviser tous les officiers du navire","Coordonner avec le commandement supérieur"],en:["Command a medium warship","Plan navigation and maneuvers","Supervise all ship officers","Coordinate with high command"]},a:{ar:"سيدي المقدم",fr:"Commandant",en:"Commander"}}
-  ]},
-  {cat:{ar:"الضباط السامون",fr:"Officiers supérieurs",en:"Senior Officers"},items:[
-    {b:"👑",s:"★★★★★★★",n:{ar:"عميد بحري",fr:"Contre-amiral",en:"Rear Admiral"},c:"O-7",t:{ar:["قيادة أسطول أو منطقة بحرية","وضع الاستراتيجيات البحرية","التفاوض مع القوى الأجنبية","الإشراف على جميع العمليات البحرية"],fr:["Commander une flotte ou zone maritime","Élaborer les stratégies navales","Négocier avec les puissances étrangères","Superviser toutes les opérations navales"],en:["Command a fleet or naval zone","Develop naval strategies","Negotiate with foreign powers","Oversee all naval operations"]},a:{ar:"سيادة العميد",fr:"Amiral",en:"Admiral"}},
-    {b:"👑",s:"★★★★★★★★",n:{ar:"أمير البحرية",fr:"Amiral",en:"Admiral"},c:"O-10",t:{ar:["القائد الأعلى للبحرية الوطنية","تمثيل القوة البحرية دولياً","وضع سياسة الدفاع البحري","التنسيق مع رئاسة الجمهورية"],fr:["Commandant suprême de la marine nationale","Représenter la puissance navale internationalement","Définir la politique de défense navale","Coordonner avec la présidence de la République"],en:["Supreme Commander of the National Navy","Represent naval power internationally","Define naval defense policy","Coordinate with the Presidency"]},a:{ar:"فخامة الأمير",fr:"Amiral de la flotte",en:"Fleet Admiral"}}
-  ]}
+  {
+    cat:{ar:"رجال الصف",fr:"Hommes du Rang",en:"Enlisted Soldiers"},
+    grid:3,
+    items:[
+      {n:{ar:"جندي",fr:"Soldat / Matelot",en:"Private / Sailor"},
+       ep:{bg:'#1a1a2e', anchor:true, vstripes:1},
+       a:{ar:"الجندي + الاسم",fr:"Soldat + Nom",en:"Private + Name"}},
+      {n:{ar:"عريف",fr:"Caporal",en:"Corporal"},
+       ep:{bg:'#1a1a2e', anchor:true, vstripes:1, chevrons:1},
+       a:{ar:"العريف + الاسم",fr:"Caporal + Nom",en:"Corporal + Name"}},
+      {n:{ar:"عريف أول",fr:"Caporal-Chef",en:"Senior Corporal"},
+       ep:{bg:'#1a1a2e', anchor:true, vstripes:1, chevrons:2},
+       a:{ar:"العريف الأول + الاسم",fr:"Caporal-Chef + Nom",en:"Senior Corporal + Name"}}
+    ]
+  },
+  {
+    cat:{ar:"ضباط الصف",fr:"Sous-Officiers",en:"Non-Commissioned Officers"},
+    grid:3,
+    items:[
+      {n:{ar:"رقيب",fr:"Sergent",en:"Petty Officer 3rd"},
+       ep:{bg:'#1a1a2e', anchor:true, stripes:['#d4a843']},
+       a:{ar:"الرقيب + الاسم",fr:"Sergent + Nom",en:"Petty Officer + Name"}},
+      {n:{ar:"رقيب أول",fr:"Sergent-Chef",en:"Petty Officer 2nd"},
+       ep:{bg:'#1a1a2e', anchor:true, stripes:['#d4a843','#d4a843']},
+       a:{ar:"الرقيب الأول + الاسم",fr:"Sergent-Chef + Nom",en:"Sr. Petty Officer + Name"}},
+      {n:{ar:"مساعد",fr:"Adjudant",en:"Warrant Officer"},
+       ep:{bg:'#1a1a2e', anchor:true, stripes:['#d4a843','#d4a843','#d4a843']},
+       a:{ar:"المساعد + الاسم",fr:"Adjudant + Nom",en:"Warrant Officer + Name"}},
+      {n:{ar:"مساعد أول",fr:"Adjudant-Chef",en:"Chief Warrant Officer"},
+       ep:{bg:'#1a1a2e', anchor:true, stripes:['#d4a843','#d4a843','#d4a843','#d4a843']},
+       a:{ar:"المساعد الأول + الاسم",fr:"Adjudant-Chef + Nom",en:"Chief Warrant Officer + Name"}}
+    ]
+  },
+  {
+    cat:{ar:"الضباط المرؤوسون",fr:"Officiers Subalternes",en:"Junior Officers"},
+    grid:3,
+    items:[
+      {n:{ar:"ملازم",fr:"Sous-Lieutenant",en:"Second Lieutenant"},
+       ep:{bg:'#1a1a2e', stars:1},
+       a:{ar:"سيدي الملازم",fr:"Mon Sous-Lieutenant",en:"Lieutenant"}},
+      {n:{ar:"ملازم أول",fr:"Lieutenant",en:"Lieutenant"},
+       ep:{bg:'#1a1a2e', stars:2},
+       a:{ar:"سيدي الملازم الأول",fr:"Mon Lieutenant",en:"Lieutenant"}},
+      {n:{ar:"نقيب",fr:"Capitaine",en:"Captain"},
+       ep:{bg:'#1a1a2e', stars:3},
+       a:{ar:"سيدي النقيب",fr:"Mon Capitaine",en:"Captain"}}
+    ]
+  },
+  {
+    cat:{ar:"الضباط السامون",fr:"Officiers Supérieurs",en:"Senior Officers"},
+    grid:3,
+    items:[
+      {n:{ar:"رائد",fr:"Commandant",en:"Major"},
+       ep:{bg:'#1a1a2e', eagle:true},
+       a:{ar:"سيدي الرائد",fr:"Mon Commandant",en:"Major"}},
+      {n:{ar:"مقدم",fr:"Lieutenant-Colonel",en:"Lieutenant Colonel"},
+       ep:{bg:'#1a1a2e', eagle:true, stars:2},
+       a:{ar:"سيدي المقدم",fr:"Mon Commandant",en:"Commander"}},
+      {n:{ar:"عقيد",fr:"Colonel",en:"Colonel"},
+       ep:{bg:'#1a1a2e', eagle:true, stars:3},
+       a:{ar:"سيدي العقيد",fr:"Mon Colonel",en:"Colonel"}}
+    ]
+  },
+  {
+    cat:{ar:"الضباط العمداء",fr:"Officiers Généraux",en:"General Officers"},
+    grid:3,
+    items:[
+      {n:{ar:"عميد",fr:"Général",en:"Brigadier General"},
+       ep:{bg:'#2a1800', eagle:true, swords:true, stars:1},
+       a:{ar:"سيادة العميد",fr:"Mon Général",en:"Brigadier"}},
+      {n:{ar:"لواء",fr:"Général Major",en:"Major General"},
+       ep:{bg:'#2a1800', eagle:true, swords:true, stars:2},
+       a:{ar:"سيادة اللواء",fr:"Mon Général",en:"General"}},
+      {n:{ar:"فريق",fr:"Général de Corps",en:"Lieutenant General"},
+       ep:{bg:'#2a1800', eagle:true, swords:true, stars:3},
+       a:{ar:"سيادة الفريق",fr:"Mon Général",en:"General"}},
+      {n:{ar:"فريق أول",fr:"Général d'Armée",en:"General of the Army"},
+       ep:{bg:'#2a1800', eagle:true, swords:true, stars:4},
+       a:{ar:"سيادة الفريق الأول",fr:"Mon Général d'Armée",en:"General"}}
+    ]
+  }
 ];
 
+/* ============ LAWS ============ */
 const LAWS=[
-  {num:"Art. 14",cat:{ar:"الوقاية من التصادم",fr:"Prévention des collisions",en:"Collision Prevention"},ttl:{ar:"قاعدة التلاقي وجهاً لوجه",fr:"Situation de face à face",en:"Head-on Situation Rule"},txt:{ar:"عندما تقترب سفينتان آليتان وجهاً لوجه مع خطر تصادم، يجب على كل منهما الانحراف لليمين (Starboard) لتعبر كل منهما على الجانب الأيسر (Port) للأخرى. (COLREGs قاعدة 14)",fr:"Quand deux navires à moteur font route en sens contraires avec risque de collision, chacun doit venir à tribord pour passer sur le bâbord de l'autre. (COLREGS Règle 14)",en:"When two power-driven vessels are meeting head-on with risk of collision, each shall alter course to starboard to pass on the port side of the other. (COLREGs Rule 14)"}},
-  {num:"Art. 18",cat:{ar:"الوقاية من التصادم",fr:"Prévention des collisions",en:"Collision Prevention"},ttl:{ar:"أولوية المرور — الترتيب الهرمي",fr:"Priorité de passage — hiérarchie",en:"Priority of Navigation — Hierarchy"},txt:{ar:"الترتيب الهرمي للأولوية: ① عاجزة عن المناورة ② محدودة المناورة ③ مشغولة بالصيد ④ شراعية ⑤ آلية. السفن الآلية يجب أن تتحاشى جميع ما سبقها. (COLREGs قاعدة 18)",fr:"Ordre hiérarchique: ① NUC ② RAM ③ Pêche ④ Voilier ⑤ Moteur. Les navires à moteur doivent s'écarter de tous les précédents. (COLREGS Règle 18)",en:"Priority hierarchy: ① NUC ② RAM ③ Fishing ④ Sailing ⑤ Power-driven. Power-driven vessels must keep clear of all preceding types. (COLREGs Rule 18)"}},
-  {num:"MLC 2006",cat:{ar:"حقوق البحارة",fr:"Droits des marins",en:"Sailors' Rights"},ttl:{ar:"ساعات العمل والراحة على السفينة",fr:"Heures de travail et repos à bord",en:"Hours of Work and Rest on Board"},txt:{ar:"الحد الأقصى: 14 ساعة عمل في 24 ساعة، و72 ساعة في 7 أيام. الحد الأدنى للراحة: 10 ساعات في 24 ساعة، و77 ساعة في 7 أيام. (اتفاقية العمل البحري MLC 2006)",fr:"Maximum: 14h de travail/24h et 72h/7 jours. Minimum de repos: 10h/24h et 77h/7 jours. (Convention du Travail Maritime MLC 2006)",en:"Maximum: 14 hours work in any 24h period, 72 hours in 7 days. Minimum rest: 10 hours in any 24h period, 77 hours in 7 days. (Maritime Labour Convention MLC 2006)"}},
-  {num:"UNCLOS Art.98",cat:{ar:"الإنقاذ البحري",fr:"Sauvetage maritime",en:"Maritime Rescue"},ttl:{ar:"واجب الإنقاذ في البحر — إلزامي",fr:"Obligation de sauvetage — obligatoire",en:"Duty to Render Assistance — Mandatory"},txt:{ar:"على ربان كل سفينة المبادرة لإنقاذ أي شخص في خطر الغرق، ما لم يعرض ذلك سفينته لخطر جسيم. عدم الامتثال جريمة جنائية دولية. (UNCLOS 1982 المادة 98)",fr:"Le capitaine est tenu de porter secours à toute personne en péril en mer, sauf danger grave pour son navire. Non-respect = crime pénal international. (UNCLOS 1982 Art. 98)",en:"The master is bound to render assistance to any person in danger at sea, unless it creates serious danger to his vessel. Non-compliance is an international criminal offense. (UNCLOS 1982 Art. 98)"}},
-  {num:"Loi 98-05",cat:{ar:"المياه الإقليمية",fr:"Eaux territoriales",en:"Territorial Waters"},ttl:{ar:"حدود المياه الجزائرية",fr:"Limites des eaux algériennes",en:"Algerian Waters Limits"},txt:{ar:"المياه الإقليمية: 12 ميلاً بحرياً من خط الأساس. المنطقة الاقتصادية الخالصة: 200 ميل بحري. يُشترط إشعار مسبق لدخول السفن الأجنبية. (القانون البحري الجزائري 98-05)",fr:"Eaux territoriales: 12 milles marins. ZEE: 200 milles. Notification préalable requise pour les navires étrangers. (Loi Maritime Algérienne 98-05)",en:"Territorial waters: 12 nautical miles from baseline. EEZ: 200 nautical miles. Prior notification required for foreign vessels. (Algerian Maritime Law 98-05)"}},
-  {num:"SOLAS XI-2",cat:{ar:"السلامة البحرية",fr:"Sécurité maritime",en:"Maritime Safety"},ttl:{ar:"نظام ISPS — أمن السفن",fr:"Code ISPS — Sécurité des navires",en:"ISPS Code — Ship Security"},txt:{ar:"يُلزم جميع السفن التجارية الدولية باعتماد: تقييم أمن السفينة، خطة أمن السفينة، وضابط أمن مؤهل. ثلاثة مستويات: 1 (عادي) 2 (مرتفع) 3 (طارئ). (SOLAS الفصل XI-2)",fr:"Oblige tous les navires commerciaux à adopter: évaluation de sûreté, plan de sûreté, officier de sûreté qualifié. 3 niveaux: 1 (normal), 2 (élevé), 3 (urgence). (SOLAS Chapitre XI-2)",en:"Requires all international commercial ships to adopt: Ship Security Assessment, Ship Security Plan, Ship Security Officer. 3 levels: 1 (normal), 2 (heightened), 3 (exceptional). (SOLAS Chapter XI-2)"}}
+  {num:"COLREGs R.14",cat:{ar:"الوقاية من التصادم",fr:"Prévention collisions",en:"Collision Prevention"},ttl:{ar:"قاعدة التلاقي وجهاً لوجه",fr:"Situation de face à face",en:"Head-on Situation"},ref:"COLREGs — Rule 14",txt:{ar:"عندما تقترب سفينتان آليتان وجهاً لوجه مع خطر تصادم، يجب على كل منهما الانحراف لليمين (Starboard) لتعبر كل منهما على الجانب الأيسر (Port) للأخرى.",fr:"Quand deux navires à moteur font route en sens contraires avec risque de collision, chacun doit venir à tribord pour passer sur le bâbord de l'autre.",en:"When two power-driven vessels are meeting head-on with risk of collision, each shall alter course to starboard to pass on the port side of the other."}},
+  {num:"COLREGs R.18",cat:{ar:"الوقاية من التصادم",fr:"Prévention collisions",en:"Collision Prevention"},ttl:{ar:"أولوية المرور — الترتيب الهرمي",fr:"Priorité de passage",en:"Priority Hierarchy"},ref:"COLREGs — Rule 18",txt:{ar:"الترتيب: ① عاجزة عن المناورة (NUC) ② محدودة المناورة (RAM) ③ مقيدة بغاطسها ④ مشغولة بالصيد ⑤ شراعية ⑥ آلية. السفن الآلية تتحاشى الجميع.",fr:"Ordre: ① NUC ② RAM ③ Contrainte par tirant d'eau ④ Pêche ⑤ Voilier ⑥ Moteur.",en:"Priority: ① NUC ② RAM ③ Constrained by draught ④ Fishing ⑤ Sailing ⑥ Power-driven."}},
+  {num:"MLC 2006",cat:{ar:"حقوق البحارة",fr:"Droits des marins",en:"Sailors' Rights"},ttl:{ar:"ساعات العمل والراحة",fr:"Heures de travail et repos",en:"Hours of Work and Rest"},ref:"Maritime Labour Convention 2006",txt:{ar:"الحد الأقصى للعمل: 14 ساعة في 24 ساعة، و72 ساعة في 7 أيام. الحد الأدنى للراحة: 10 ساعات في 24 ساعة، و77 ساعة في 7 أيام.",fr:"Maximum de travail: 14h/24h et 72h/7j. Minimum de repos: 10h/24h et 77h/7j.",en:"Max work: 14h in 24h period, 72h in 7 days. Min rest: 10h in 24h period, 77h in 7 days."}},
+  {num:"UNCLOS Art.98",cat:{ar:"الإنقاذ البحري",fr:"Sauvetage maritime",en:"Maritime Rescue"},ttl:{ar:"واجب الإنقاذ — إلزامي قانوناً",fr:"Obligation de sauvetage",en:"Duty to Render Assistance"},ref:"UNCLOS 1982 — Article 98",txt:{ar:"على ربان كل سفينة المبادرة لإنقاذ أي شخص في خطر الغرق في جميع المناطق البحرية. الامتناع جريمة جنائية دولية.",fr:"Le capitaine doit porter secours à toute personne en péril dans toutes les zones maritimes. Le refus est un crime international.",en:"The master must render assistance to any person in danger in all maritime zones. Refusal is an international criminal offense."}},
+  {num:"Loi 98-05",cat:{ar:"المياه الإقليمية",fr:"Eaux territoriales",en:"Territorial Waters"},ttl:{ar:"حدود المياه الجزائرية",fr:"Eaux algériennes",en:"Algerian Waters"},ref:"القانون البحري الجزائري 98-05",txt:{ar:"المياه الإقليمية: 12 ميلاً بحرياً. المنطقة المتاخمة: 24 ميلاً. المنطقة الاقتصادية الخالصة: 200 ميل. يشترط إشعار مسبق للسفن الأجنبية.",fr:"Eaux territoriales: 12 milles. Zone contiguë: 24 milles. ZEE: 200 milles. Notification préalable requise.",en:"Territorial waters: 12nm. Contiguous zone: 24nm. EEZ: 200nm. Prior notification required for foreign vessels."}},
+  {num:"SOLAS XI-2",cat:{ar:"السلامة البحرية",fr:"Sécurité maritime",en:"Maritime Safety"},ttl:{ar:"نظام ISPS — أمن السفن",fr:"Code ISPS",en:"ISPS Code"},ref:"SOLAS 1974 — Chapter XI-2",txt:{ar:"يُلزم السفن التجارية (+500 طن) باعتماد: تقييم أمن السفينة (SSA)، خطة أمن (SSP)، وضابط أمن (SSO). ثلاثة مستويات: 1 (عادي) 2 (مرتفع) 3 (طارئ).",fr:"Oblige les navires commerciaux (+500 tx): SSA + SSP + SSO. 3 niveaux: 1 (normal), 2 (élevé), 3 (urgence).",en:"Requires commercial vessels (+500 GT): SSA + SSP + SSO. 3 security levels: 1 (normal), 2 (heightened), 3 (exceptional)."}}
 ];
 
+/* ============ QUIZ ============ */
 const QUIZ=[
-  {sc:{ar:"سفينتان آليتان تتجهان وجهاً لوجه في ممر ضيق مع خطر تصادم واضح. ما الإجراء الصحيح وفق COLREGs؟",fr:"Deux navires à moteur se dirigent face à face dans un chenal étroit avec risque de collision évident. Quelle est la bonne procédure selon les COLREGS?",en:"Two power-driven vessels are heading face-on in a narrow channel with clear collision risk. What is the correct procedure per COLREGs?"},
-   opts:{ar:["كلتا السفينتين تنحرف لليمين (Starboard)","السفينة الأكبر حجماً لها الأولوية","القادمة من الجانب الأيمن لها الأولوية","يُطلق صافرة واحدة ثم الانتظار"],fr:["Les deux navires virent à tribord","Le plus grand navire a la priorité","Le navire venant de tribord a la priorité","Un coup de sifflet puis attendre"],en:["Both vessels alter course to starboard","The larger vessel has priority","The vessel from starboard has priority","One whistle blast then wait"]},
-   ans:0,exp:{ar:"◀ وفقاً للقاعدة 14 من COLREGs (حالة التلاقي وجهاً لوجه): كل سفينة تنحرف لليمين (Starboard) لتعبر على الجانب الأيسر (Port) للأخرى. هذا هو المبدأ الأساسي في منع التصادم البحري.",fr:"◀ Selon la Règle 14 des COLREGS (situation de face à face): chaque navire doit venir à tribord pour passer sur le bâbord de l'autre. C'est le principe fondamental de prévention des abordages.",en:"◀ Per COLREG Rule 14 (head-on situation): each vessel must alter course to starboard so they pass on each other's port sides. This is the fundamental head-on collision prevention rule."}},
-  {sc:{ar:"ربان سفينة تجارية تعبر المنطقة الاقتصادية الخالصة الجزائرية اكتشف شخصاً يغرق قريباً. ماذا يفعل قانونياً؟",fr:"Un capitaine traversant la ZEE algérienne découvre une personne qui se noie près de son navire. Que doit-il faire légalement?",en:"A captain crossing the Algerian EEZ discovers a person drowning nearby. What must he do legally?"},
-   opts:{ar:["يبلغ خفر السواحل وينتظر التعليمات","يواصل رحلته لأنه في المنطقة الاقتصادية لا المياه الإقليمية","يبادر فوراً للإنقاذ ما لم يكن هناك خطر جسيم على السفينة","ينتظر موافقة شركة التأمين أولاً"],fr:["Informer les gardes-côtes et attendre","Continuer car il est en ZEE et non en eaux territoriales","Procéder immédiatement au sauvetage sauf danger grave","Attendre l'accord de la compagnie d'assurance"],en:["Notify coast guard and wait for instructions","Continue since he's in EEZ not territorial waters","Immediately rescue unless serious danger to vessel","Wait for insurance company approval"]},
-   ans:2,exp:{ar:"◀ وفقاً للمادة 98 من اتفاقية UNCLOS 1982، إنقاذ الأرواح في البحر واجب قانوني مطلق يسري في جميع المناطق البحرية دون استثناء. عدم الامتثال يُعرض الربان للملاحقة الجنائية الدولية.",fr:"◀ Selon l'Article 98 de l'UNCLOS 1982, sauver des vies en mer est une obligation légale absolue dans toutes les zones maritimes. Non-respect expose le capitaine à des poursuites pénales internationales.",en:"◀ Under UNCLOS 1982 Art. 98, saving lives at sea is an absolute legal duty in all maritime zones without exception. Non-compliance exposes the captain to international criminal prosecution."}},
-  {sc:{ar:"سفينة شراعية وسفينة آلية تتقاطع مساراتهما في عرض البحر. أي منهما يجب أن تتنحى لتجنب التصادم؟",fr:"Un voilier et un navire à moteur voient leurs routes se croiser en pleine mer. Lequel doit s'écarter pour éviter la collision?",en:"A sailing vessel and a power-driven vessel have crossing courses on open sea. Which must give way to avoid collision?"},
-   opts:{ar:["السفينة الشراعية لأنها أبطأ وأصغر","السفينة الآلية وفق الترتيب الهرمي في COLREGs","يُحدد ذلك بحسب من وصل أولاً","تتنحى كلتاهما بالتساوي"],fr:["Le voilier car il est plus lent et plus petit","Le navire à moteur selon la hiérarchie des COLREGS","Selon qui est arrivé en premier","Les deux s'écartent également"],en:["The sailing vessel because it's slower and smaller","The power-driven vessel per the COLREGs hierarchy","Determined by who arrived first","Both give way equally"]},
-   ans:1,exp:{ar:"◀ وفقاً للقاعدة 18 من COLREGs، الترتيب الهرمي واضح: الشراعية لها أولوية مرور على الآلية. السفينة الآلية يجب أن تتحاشى السفينة الشراعية دائماً بصرف النظر عن الحجم أو السرعة.",fr:"◀ Selon la Règle 18 des COLREGS, la hiérarchie est claire: le voilier a toujours priorité sur le navire à moteur. Le navire à moteur doit s'écarter du voilier, peu importe la taille ou la vitesse.",en:"◀ Per COLREG Rule 18, the hierarchy is clear: sailing vessels always have right of way over power-driven vessels. The power-driven vessel must give way regardless of size or speed."}}
+  {sc:{ar:"سفينتان آليتان تتجهان وجهاً لوجه في ممر ضيق مع خطر تصادم. ما الإجراء الصحيح وفق COLREGs؟",fr:"Deux navires à moteur se dirigent face à face dans un chenal. Bonne procédure selon les COLREGS?",en:"Two power-driven vessels head-on in a narrow channel. Correct procedure per COLREGs?"},
+   opts:{ar:["كلتا السفينتين تنحرف لليمين (Starboard)","السفينة الأكبر لها الأولوية","القادمة من الجانب الأيمن لها الأولوية","يُطلق صافرة واحدة ثم الانتظار"],fr:["Les deux virent à tribord","Le plus grand a la priorité","Celui de tribord a la priorité","Un coup de sifflet puis attendre"],en:["Both vessels alter to starboard","The larger vessel has priority","Vessel from starboard has priority","One whistle blast then wait"]},
+   ans:0,ref:"COLREGs Rule 14",
+   exp:{ar:"القاعدة 14 من COLREGs: كلتا السفينتين تنحرف لليمين (Starboard) لتعبر كل منهما على الجانب الأيسر (Port) للأخرى. القاعدة مطلقة.",fr:"Règle 14 COLREGS: les deux navires virent à tribord pour passer sur le bâbord l'un de l'autre.",en:"COLREG Rule 14: both vessels alter course to starboard so they pass on each other's port sides."}},
+  {sc:{ar:"ربان سفينة تجارية في المنطقة الاقتصادية الخالصة الجزائرية اكتشف شخصاً يغرق. ماذا يفعل قانونياً؟",fr:"Capitaine en ZEE algérienne découvre une personne qui se noie. Que faire légalement?",en:"Captain in Algerian EEZ discovers a drowning person. What must he do legally?"},
+   opts:{ar:["يبلغ خفر السواحل وينتظر","يواصل لأنه في المنطقة الاقتصادية","يبادر فوراً للإنقاذ ما لم يكن هناك خطر جسيم","ينتظر موافقة التأمين"],fr:["Informer les gardes-côtes et attendre","Continuer car il est en ZEE","Procéder immédiatement sauf danger grave","Attendre l'accord de l'assurance"],en:["Notify coast guard and wait","Continue since he's in EEZ","Immediately rescue unless serious danger","Wait for insurance approval"]},
+   ans:2,ref:"UNCLOS 1982 Art. 98",
+   exp:{ar:"المادة 98 من UNCLOS 1982: إنقاذ الأرواح واجب قانوني مطلق في جميع المناطق البحرية. الامتناع جريمة جنائية دولية.",fr:"Art. 98 UNCLOS 1982: sauver des vies est obligatoire dans toutes les zones maritimes. Refus = crime international.",en:"UNCLOS 1982 Art. 98: saving lives is an absolute legal duty in all maritime zones. Refusal is an international crime."}},
+  {sc:{ar:"سفينة شراعية وسفينة آلية تتقاطع مساراتهما. أي منهما تتنحى لتجنب التصادم؟",fr:"Un voilier et un navire à moteur se croisent. Lequel s'écarte?",en:"A sailing vessel and a power-driven vessel have crossing courses. Which gives way?"},
+   opts:{ar:["الشراعية لأنها أبطأ","الآلية وفق الترتيب الهرمي","يُحدد بحسب من وصل أولاً","تتنحى كلتاهما"],fr:["Le voilier car plus lent","Le moteur selon la hiérarchie","Selon qui est arrivé premier","Les deux s'écartent"],en:["The sailing vessel — slower","The power-driven — per hierarchy","Determined by who arrived first","Both give way"]},
+   ans:1,ref:"COLREGs Rule 18",
+   exp:{ar:"القاعدة 18 من COLREGs: الشراعية دائماً لها الأولوية على الآلية. السفينة الآلية هي التي تتنحى بصرف النظر عن الحجم أو السرعة.",fr:"Règle 18 COLREGS: le voilier a toujours priorité. Le navire à moteur s'écarte quelle que soit la taille.",en:"COLREG Rule 18: sailing vessels always have right of way over power-driven vessels regardless of size."}}
 ];
 
+/* ============ FLAGS ============ */
 const FLAGS=[
-  {l:"A",c:["#1565c0","#ffffff"],n:{ar:"ألفا",fr:"Alpha",en:"Alpha"},m:{ar:"لدي غواص — تحرك ببطء",fr:"Plongeur en eau — lentement",en:"Diver down — go slow"}},
-  {l:"B",c:["#c62828","#c62828"],n:{ar:"برافو",fr:"Bravo",en:"Bravo"},m:{ar:"أشحن مواد خطرة",fr:"Chargement matières dangereuses",en:"Carrying dangerous goods"}},
-  {l:"C",c:["#1565c0","#ffffff"],n:{ar:"تشارلي",fr:"Charlie",en:"Charlie"},m:{ar:"نعم / إيجابي",fr:"Oui / Affirmatif",en:"Yes / Affirmative"}},
-  {l:"D",c:["#f57f17","#1565c0"],n:{ar:"دلتا",fr:"Delta",en:"Delta"},m:{ar:"ابتعد — صعوبة في المناورة",fr:"Manœuvre difficile",en:"Maneuvering difficulty"}},
-  {l:"H",c:["#ffffff","#c62828"],n:{ar:"هوتيل",fr:"Hotel",en:"Hotel"},m:{ar:"يوجد طبيب على متني",fr:"Médecin à bord",en:"Doctor on board"}},
-  {l:"N",c:["#1565c0","#ffffff"],n:{ar:"نوفمبر",fr:"November",en:"November"},m:{ar:"لا / سلبي",fr:"Non / Négatif",en:"No / Negative"}},
-  {l:"O",c:["#f57f17","#c62828"],n:{ar:"أوسكار",fr:"Oscar",en:"Oscar"},m:{ar:"رجل في البحر!",fr:"Homme à la mer!",en:"Man overboard!"}},
+  {l:"A",c:["#1565c0","#fff"],n:{ar:"ألفا",fr:"Alpha",en:"Alpha"},m:{ar:"لدي غواص — تحرك ببطء وابتعد",fr:"Plongeur en eau — lentement",en:"Diver down — keep clear"}},
+  {l:"B",c:["#c62828","#c62828"],n:{ar:"برافو",fr:"Bravo",en:"Bravo"},m:{ar:"أحمل مواد خطرة",fr:"Matières dangereuses",en:"Dangerous goods aboard"}},
+  {l:"C",c:["#1565c0","#fff"],n:{ar:"تشارلي",fr:"Charlie",en:"Charlie"},m:{ar:"نعم / إيجابي",fr:"Oui / Affirmatif",en:"Yes / Affirmative"}},
+  {l:"D",c:["#f57f17","#1565c0"],n:{ar:"دلتا",fr:"Delta",en:"Delta"},m:{ar:"ابتعد — صعوبة في المناورة",fr:"Difficulté de manœuvre",en:"Maneuvering difficulty"}},
+  {l:"H",c:["#fff","#c62828"],n:{ar:"هوتيل",fr:"Hotel",en:"Hotel"},m:{ar:"طبيب على متني",fr:"Médecin à bord",en:"Doctor on board"}},
+  {l:"N",c:["#1565c0","#fff"],n:{ar:"نوفمبر",fr:"November",en:"November"},m:{ar:"لا / سلبي",fr:"Non / Négatif",en:"No / Negative"}},
+  {l:"O",c:["#f57f17","#c62828"],n:{ar:"أوسكار",fr:"Oscar",en:"Oscar"},m:{ar:"رجل سقط في البحر!",fr:"Homme à la mer!",en:"Man overboard!"}},
   {l:"Q",c:["#f9a825","#f9a825"],n:{ar:"كيبيك",fr:"Quebec",en:"Quebec"},m:{ar:"أطلب رخصة الصحة",fr:"Demande libre pratique",en:"Request free pratique"}},
-  {l:"W",c:["#c62828","#ffffff"],n:{ar:"ويسكي",fr:"Whiskey",en:"Whiskey"},m:{ar:"أحتاج مساعدة طبية",fr:"Aide médicale requise",en:"Medical assistance needed"}}
+  {l:"W",c:["#c62828","#fff"],n:{ar:"ويسكي",fr:"Whiskey",en:"Whiskey"},m:{ar:"أحتاج مساعدة طبية",fr:"Aide médicale requise",en:"Medical assistance needed"}}
 ];
 
+/* ============ STATE ============ */
 let lang='ar', activeCat='all', qIdx=0, qScore=0, answered=false;
 function t(k){return T[lang][k]||k}
 
+/* ============ LANGUAGE ============ */
 function setL(l){
   lang=l;
   document.documentElement.lang=l;
@@ -286,46 +536,62 @@ function setL(l){
   renderAll();
 }
 
+/* ============ NAVIGATION ============ */
 function goS(id,idx){
   document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));
   document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
   document.getElementById('s-'+id).classList.add('on');
-  const btns=document.querySelectorAll('.nb');
   const map={home:0,ranks:1,laws:2,quiz:3,flags:4};
   const i=idx!==undefined?idx:map[id];
-  if(btns[i])btns[i].classList.add('on');
+  document.querySelectorAll('.nb')[i].classList.add('on');
   document.querySelector('.scroll').scrollTop=0;
 }
 
+/* ============ RENDER ALL ============ */
 function renderAll(){renderR();renderL();renderQ();renderF();}
 
+/* ============ RANKS ============ */
 function renderR(){
-  document.getElementById('ranks-list').innerHTML=RANKS.map(g=>`
-    <div class="rcat">${g.cat[lang]}</div>
-    <div class="rgrid">${g.items.map(r=>`
+  document.getElementById('ranks-list').innerHTML=RANKS.map(g=>{
+    const cols = g.grid||3;
+    const gridClass = cols===2?'rgrid-2':'rgrid';
+    const cards = g.items.map(r=>`
       <div class="rcard" onclick='openR(${JSON.stringify(r)})'>
-        <div class="rb">${r.b}</div>
-        <div class="rs">${r.s}</div>
+        <div class="epaulette-wrap">${epSVG(r.ep, true)}</div>
         <div class="rn">${r.n[lang]}</div>
-        <div class="rc">${r.c}</div>
-      </div>`).join('')}</div>`).join('');
+        <div class="rfr">${r.n.fr}</div>
+      </div>`).join('');
+    return `<div class="rcat-wrap">
+      <div class="rcat-label">${g.cat[lang]}</div>
+      <div class="${gridClass}">${cards}</div>
+    </div>`;
+  }).join('');
 }
 
 function openR(r){
   document.getElementById('mod-in').innerHTML=`
     <h2>${r.n[lang]}</h2>
-    <div class="mbig">${r.b}</div>
-    <div class="minf"><h4>${t('grade')}</h4><p>${r.c} &nbsp;|&nbsp; ${r.s}</p></div>
-    <div class="minf"><h4>${t('tasks')}</h4><ul>${r.t[lang].map(x=>`<li>${x}</li>`).join('')}</ul></div>
-    <div class="minf"><h4>${t('addr')}</h4><p>${r.a[lang]}</p></div>`;
+    <div class="modal-ep">${epSVG(r.ep, false)}</div>
+    <div class="minf">
+      <h4>${t('grade')}</h4>
+      <p>${r.n[lang]}</p>
+      <p class="fr-nm">🇫🇷 ${r.n.fr}</p>
+      <p class="en-nm">🇬🇧 ${r.n.en}</p>
+    </div>
+    <div class="minf">
+      <h4>${t('addr')}</h4>
+      <p>${r.a[lang]}</p>
+    </div>`;
   document.getElementById('rmod').classList.add('on');
   document.body.style.overflow='hidden';
 }
 function closeMod(){document.getElementById('rmod').classList.remove('on');document.body.style.overflow='';}
 
+/* ============ LAWS ============ */
 function renderL(){
   const cats=[t('cat_all'),...new Set(LAWS.map(l=>l.cat[lang]))];
-  document.getElementById('ctabs').innerHTML=cats.map((c,i)=>`<button class="ctab${(activeCat==='all'&&i===0)||(activeCat===c)?' on':''}" onclick="setC('${i===0?'all':c}')">${c}</button>`).join('');
+  document.getElementById('ctabs').innerHTML=cats.map((c,i)=>`
+    <button class="ctab${(activeCat==='all'&&i===0)||(activeCat===c)?' on':''}" onclick="setC('${i===0?'all':c}')">${c}</button>`).join('');
   filtL();
 }
 function setC(c){activeCat=c;renderL();}
@@ -340,16 +606,18 @@ function filtL(){
         <span class="larr">▼</span>
       </div>
       <span class="lcatb">${l.cat[lang]}</span>
-      <div class="lbody">${l.txt[lang]}</div>
+      <span class="lref">📖 ${l.ref}</span>
+      <div class="lbody">${l.txt[lang]}<span class="ref-tag">📖 ${l.ref}</span></div>
     </div>`).join('')||`<p style="text-align:center;color:var(--muted);padding:2rem">لا توجد نتائج / No results</p>`;
 }
 
+/* ============ QUIZ ============ */
 function renderQ(){
   const q=QUIZ[qIdx];
   document.getElementById('quiz-body').innerHTML=`
     <div class="srow">
       <div><div class="slbl">${t('slbl')}</div><div class="snum">${qScore}/${QUIZ.length}</div></div>
-      <div class="sprog">${qIdx+1} / ${QUIZ.length}</div>
+      <div style="font-size:12px;color:var(--muted)">${qIdx+1} / ${QUIZ.length}</div>
     </div>
     <div class="sccard">
       <div class="sclab">⚖️ ${lang==='ar'?'سيناريو':lang==='fr'?'Scénario':'Scenario'}</div>
@@ -361,17 +629,22 @@ function renderQ(){
   answered=false;
 }
 function ansQ(i){
-  if(answered)return;answered=true;
-  const q=QUIZ[qIdx];const ok=i===q.ans;
+  if(answered)return; answered=true;
+  const q=QUIZ[qIdx]; const ok=i===q.ans;
   if(ok)qScore++;
-  document.querySelectorAll('.qopt').forEach((o,j)=>{o.classList.add('off');if(j===q.ans)o.classList.add('ok');else if(j===i)o.classList.add('ng');});
+  document.querySelectorAll('.qopt').forEach((o,j)=>{
+    o.classList.add('off');
+    if(j===q.ans)o.classList.add('ok');
+    else if(j===i)o.classList.add('ng');
+  });
   const r=document.getElementById('qr');
-  r.innerHTML=`<strong>${ok?t('correct'):t('wrong')}</strong><br><br>${q.exp[lang]}`;
+  r.innerHTML=`<strong>${ok?t('correct'):t('wrong')}</strong><br><br>${q.exp[lang]}<br><span style="font-size:11px;color:var(--accent);margin-top:8px;display:block">📖 ${q.ref}</span>`;
   r.classList.add('on');
   document.getElementById('qnx').classList.add('on');
 }
-function nextQ(){qIdx=(qIdx+1)%QUIZ.length;if(qIdx===0)qScore=0;renderQ();}
+function nextQ(){qIdx=(qIdx+1)%QUIZ.length; if(qIdx===0)qScore=0; renderQ();}
 
+/* ============ FLAGS ============ */
 function renderF(){
   document.getElementById('fgrid').innerHTML=FLAGS.map(f=>`
     <div class="fcard">
@@ -384,8 +657,10 @@ function renderF(){
     </div>`).join('');
 }
 
+/* ============ INIT ============ */
 document.getElementById('rmod').addEventListener('click',e=>{if(e.target===e.currentTarget)closeMod();});
 document.getElementById('lsrc').placeholder=t('sph');
+document.querySelectorAll('.tk').forEach(el=>el.textContent=t(el.dataset.k));
 renderAll();
 </script>
 </body>
